@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 13a4b64bb25e26943b9579b861dc0c60
-timeCreated: 1510205471
+timeCreated: 1510253429
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -12,6 +12,14 @@ TextureImporter:
     21300010: TF_Anim_5
     21300012: TF_Anim_6
     21300014: TF_Anim_7
+    21300016: TF_Anim_8
+    21300018: TF_Anim_9
+    21300020: TF_Anim_10
+    21300022: TF_Anim_11
+    21300024: TF_Anim_12
+    21300026: TF_Anim_13
+    21300028: TF_Anim_14
+    21300030: TF_Anim_15
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -89,10 +97,10 @@ TextureImporter:
       name: TF_Anim_0
       rect:
         serializedVersion: 2
-        x: 58
-        y: 259
-        width: 150
-        height: 500
+        x: 57
+        y: 1314
+        width: 152
+        height: 502
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -103,9 +111,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 230
-        y: 257
-        width: 180
-        height: 502
+        y: 1312
+        width: 181
+        height: 504
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,10 +123,10 @@ TextureImporter:
       name: TF_Anim_2
       rect:
         serializedVersion: 2
-        x: 451
-        y: 252
-        width: 228
-        height: 507
+        x: 450
+        y: 1308
+        width: 230
+        height: 508
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,10 +136,10 @@ TextureImporter:
       name: TF_Anim_3
       rect:
         serializedVersion: 2
-        x: 721
-        y: 251
-        width: 180
-        height: 508
+        x: 720
+        y: 1306
+        width: 182
+        height: 510
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,10 +149,10 @@ TextureImporter:
       name: TF_Anim_4
       rect:
         serializedVersion: 2
-        x: 941
-        y: 255
-        width: 163
-        height: 504
+        x: 940
+        y: 1309
+        width: 165
+        height: 507
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,9 +163,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1145
-        y: 256
-        width: 173
-        height: 503
+        y: 1311
+        width: 174
+        height: 505
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,10 +175,10 @@ TextureImporter:
       name: TF_Anim_6
       rect:
         serializedVersion: 2
-        x: 1363
-        y: 246
-        width: 212
-        height: 513
+        x: 1362
+        y: 1301
+        width: 214
+        height: 515
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -180,10 +188,114 @@ TextureImporter:
       name: TF_Anim_7
       rect:
         serializedVersion: 2
-        x: 1625
-        y: 247
-        width: 170
-        height: 513
+        x: 1624
+        y: 1302
+        width: 172
+        height: 515
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TF_Anim_8
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 714
+        width: 171
+        height: 515
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TF_Anim_9
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 713
+        width: 214
+        height: 515
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TF_Anim_10
+      rect:
+        serializedVersion: 2
+        x: 534
+        y: 723
+        width: 175
+        height: 505
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TF_Anim_11
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 722
+        width: 165
+        height: 506
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TF_Anim_12
+      rect:
+        serializedVersion: 2
+        x: 951
+        y: 718
+        width: 182
+        height: 510
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TF_Anim_13
+      rect:
+        serializedVersion: 2
+        x: 1173
+        y: 720
+        width: 230
+        height: 508
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TF_Anim_14
+      rect:
+        serializedVersion: 2
+        x: 1442
+        y: 724
+        width: 181
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TF_Anim_15
+      rect:
+        serializedVersion: 2
+        x: 1644
+        y: 725
+        width: 152
+        height: 503
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
