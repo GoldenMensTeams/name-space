@@ -37,10 +37,11 @@ public class ControlPle : MonoBehaviour
 
         if (position.x > 0)
         {
-            if(CnInputManager.GetButtonDown("Run"))
+            if(CnInputManager.GetButton("Run"))
             {
                 speed = run;
                 Debug.Log(run);
+                Debug.Log("Run");
             }
             else {
                 // transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -55,10 +56,11 @@ public class ControlPle : MonoBehaviour
         }
         else if (position.x < 0)
         {
-            if (CnInputManager.GetButtonDown("Run"))
+            if (CnInputManager.GetButton("Run"))
             {
                 speed = run;
                 Debug.Log(run);
+                Debug.Log("Run");
             }
             else
             {
@@ -137,7 +139,18 @@ public class ControlPle : MonoBehaviour
         }
      
     }
+    void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Ground")
+        {
 
+            gameObject.GetComponent<Animator>().SetTrigger("idle");
+            gameObject.GetComponent<Animator>().ResetTrigger("Jump");
+
+
+            isJump = true;
+        }
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Ground")
