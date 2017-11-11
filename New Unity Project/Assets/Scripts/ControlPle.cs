@@ -137,7 +137,6 @@ public class ControlPle : MonoBehaviour
             Move();
             Attack();
         }
-     
     }
     void OnTriggerStay(Collider other)
     {

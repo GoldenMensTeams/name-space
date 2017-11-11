@@ -5155,7 +5155,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &501346113
 Transform:
   m_ObjectHideFlags: 0
@@ -13054,7 +13054,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44192add860b30e4bafc3352a3174de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pl: {fileID: 501346112}
+  pl: {fileID: 1488986491}
 --- !u!4 &1274501017 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4770435669475992, guid: de2f46b586b3d184e956c8ddf45dede0,
@@ -15727,7 +15727,7 @@ GameObject:
   - component: {fileID: 1488986497}
   m_Layer: 0
   m_Name: TF_Anim
-  m_TagString: Untagged
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15757,8 +15757,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  run: 0
-  Jump: 5
+  run: 10
+  Jump: 700
   HELS: 1
   Enerjy: 1
   Stamina: 1
@@ -15857,7 +15857,7 @@ Animator:
   m_GameObject: {fileID: 1488986491}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 243b315bf9e8e8e438b3edb79bc7630c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7b064f757c045b440be2573ed93c70a4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -17165,7 +17165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 019d1471e94e35e44a8b635de79d9981, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pl: {fileID: 501346112}
+  pl: {fileID: 1488986491}
 --- !u!1001 &1588131009
 Prefab:
   m_ObjectHideFlags: 0
@@ -22574,7 +22574,7 @@ Animator:
   m_GameObject: {fileID: 2048762484}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d9f811670c8feb84685fd1f5ab9a4039, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7b064f757c045b440be2573ed93c70a4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
