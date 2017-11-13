@@ -7,10 +7,10 @@ TagManager:
   - Player1
   - Attack
   - Ground
-  - Gra
   - MenuOnGame
   - PlayerGui
   - OpenMenu
+  - Attack_truncheon
   layers:
   - Default
   - TransparentFX

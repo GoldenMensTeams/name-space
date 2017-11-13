@@ -118,7 +118,6 @@
     <Compile Include="Assets\Model\Standard Assets\Utility\TimedObjectDestructor.cs" />
     <Compile Include="Assets\Model\Standard Assets\Utility\WaypointCircuit.cs" />
     <Compile Include="Assets\Model\Standard Assets\Utility\WaypointProgressTracker.cs" />
-    <Compile Include="Assets\Scripts\BackGround.cs" />
     <Compile Include="Assets\Scripts\CNControls\Examples\Scenes\2D\Scripts\Platformer2DUserControl.cs" />
     <Compile Include="Assets\Scripts\CNControls\Examples\Scenes\Custom Joystick\FourWayController.cs" />
     <Compile Include="Assets\Scripts\CNControls\Examples\Scenes\Third Person\AbstractTargetFollower.cs" />
@@ -139,12 +138,13 @@
     <Compile Include="Assets\Scripts\CNControls\Scripts\Controllers\Touchpad.cs" />
     <Compile Include="Assets\Scripts\CNControls\Scripts\EmptyGraphic.cs" />
     <Compile Include="Assets\Scripts\CameraScrin.cs" />
-    <Compile Include="Assets\Scripts\ControlPle.cs" />
-    <Compile Include="Assets\Scripts\Ground.cs" />
     <Compile Include="Assets\Scripts\Menu\MenuClose.cs" />
     <Compile Include="Assets\Scripts\Menu\MenuOpen.cs" />
-    <Compile Include="Assets\Scripts\Resp.cs" />
-    <Compile Include="Assets\Scripts\Water.cs" />
+    <Compile Include="Assets\Scripts\Player\ControlPle.cs" />
+    <Compile Include="Assets\Scripts\Terain\BackGround.cs" />
+    <Compile Include="Assets\Scripts\Terain\Ground.cs" />
+    <Compile Include="Assets\Scripts\Terain\Resp.cs" />
+    <Compile Include="Assets\Scripts\Terain\Water.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Model\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
