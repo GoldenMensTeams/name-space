@@ -33,7 +33,7 @@ public class ControlPle : MonoBehaviour
 
         position = new Vector3(CnInputManager.GetAxis("Horizontal"), 0f, 0f);
 
-
+        Debug.Log(position.z);
 
         if (position.x > 0)
         {
