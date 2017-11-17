@@ -9,7 +9,7 @@ public class BackGround : MonoBehaviour {
     private float y;
     public float ProzY;
     public float ProzX;
-
+   
     public MeshRenderer firstBG;
     public float firstBGSpeed = 0.01f;
     private Vector2 savedFirst;
@@ -17,7 +17,6 @@ public class BackGround : MonoBehaviour {
     public MeshRenderer secondBG;
     public float secondBGSpeed = 0.05f;
     private Vector2 savedSecond;
-
 
     public MeshRenderer BG3;
     public float BGSpeed3 = 0.05f;
@@ -45,7 +44,8 @@ public class BackGround : MonoBehaviour {
     //}
     // Update is called once per frame
     void MovePoz()
-    {
+    {      
+        
         transform.position = new Vector3(pl.transform.position.x, y + (y - pl.transform.position.y) / ProzY, transform.position.z);
     }
     void Move(MeshRenderer mesh, Vector2 savedOffset, float speed)

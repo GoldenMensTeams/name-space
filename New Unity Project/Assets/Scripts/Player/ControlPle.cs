@@ -39,17 +39,12 @@ public class ControlPle : MonoBehaviour
         {
             if(CnInputManager.GetButton("Run"))
             {
-                speed = run;
-                Debug.Log(run);
-                Debug.Log("Run");
+                speed = run;             
             }
-            else {
-                // transform.rotation = Quaternion.Euler(0, 0, 0);
-
-
-                speed = memor_speed;
-                Debug.Log(memor_speed);
+            else {             
+                speed = memor_speed;             
             }
+
             gameG.SetFloat("MoveX", position.x, 0.1f, Time.deltaTime);
             RandL = true;
             gameG.SetBool("RandL", RandL);
@@ -58,15 +53,13 @@ public class ControlPle : MonoBehaviour
         {
             if (CnInputManager.GetButton("Run"))
             {
-                speed = run;
-                Debug.Log(run);
-                Debug.Log("Run");
+                speed = run;               
             }
             else
             {
-                speed = memor_speed;
-                Debug.Log(memor_speed);
+                speed = memor_speed;               
             }
+
             gameG.SetFloat("MoveX", position.x, 0.1f, Time.deltaTime);
             RandL = false;
             gameG.SetBool("RandL", RandL);
@@ -79,8 +72,7 @@ public class ControlPle : MonoBehaviour
         if (CnInputManager.GetButtonUp("Jump") && isJump)
         {
             gameG.ResetTrigger("idle");
-            gameG.SetTrigger("Jump");
-            
+            gameG.SetTrigger("Jump");           
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, Jump), ForceMode2D.Impulse);
         }
 
@@ -131,25 +123,19 @@ public class ControlPle : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        //тут изменить логику, вместо isJupm
+        transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 0);
+
+        Debug.Log(position.z);
         transform.position += position * Time.deltaTime * speed;
+
         if (isJump)
         {
             Move();
             Attack();
         }
     }
-    void OnTriggerStay(Collider other)
-    {
-        if (other.tag == "Ground")
-        {
-
-            gameObject.GetComponent<Animator>().SetTrigger("idle");
-            gameObject.GetComponent<Animator>().ResetTrigger("Jump");
-
-
-            isJump = true;
-        }
-    }
+    
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Ground")
