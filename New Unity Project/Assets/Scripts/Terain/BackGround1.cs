@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackGround : MonoBehaviour {
+public class BackGround1 : MonoBehaviour {
 
     public GameObject pl;
     private float x;
@@ -10,9 +10,9 @@ public class BackGround : MonoBehaviour {
     public float ProzY;
     public float ProzX;
    
-    public List<MeshRenderer> List_Back_Ground;
-    public List<float> List_Back_Ground_Speed;
-    private List<Vector2> List_Back_Ground_Saved;
+    public MeshRenderer firstBG;
+    public float firstBGSpeed = 0.01f;
+    private Vector2 savedFirst;
 
    
 
@@ -26,9 +26,9 @@ public class BackGround : MonoBehaviour {
     //}
     // Update is called once per frame
     void MovePoz()
-    {
-        for (int i = 0; i <= List_Back_Ground.Count - 1; i++)
-            List_Back_Ground[i].transform.position = new Vector3(pl.transform.position.x, y + (y - pl.transform.position.y) / ProzY, List_Back_Ground[i].transform.position.z);
+    {      
+        
+        transform.position = new Vector3(pl.transform.position.x, y + (y - pl.transform.position.y) / ProzY, transform.position.z);
     }
     void Move(MeshRenderer mesh, Vector2 savedOffset, float speed)
     {
@@ -45,23 +45,20 @@ public class BackGround : MonoBehaviour {
 
     void Awake()
     {
-      for(int i=0;i <= List_Back_Ground.Count-1;i++)
-        if (List_Back_Ground[i]) List_Back_Ground_Saved[i] = List_Back_Ground[i].sharedMaterial.GetTextureOffset("_MainTex");
-      
+        if (firstBG) savedFirst = firstBG.sharedMaterial.GetTextureOffset("_MainTex");
+        
     }
 
     void Update()
     {
-        for (int i = 0; i <= List_Back_Ground.Count - 1; i++)
-            if (List_Back_Ground[i]) Move(List_Back_Ground[i], List_Back_Ground_Saved[i], List_Back_Ground_Speed[i]);
-   
+        if (firstBG) Move(firstBG, savedFirst, firstBGSpeed);
+      
 
     }
 
     void OnDisable()
     {
-        for (int i = 0; i <= List_Back_Ground.Count - 1; i++)
-            if (List_Back_Ground[i]) List_Back_Ground[i].sharedMaterial.SetTextureOffset("_MainTex", List_Back_Ground_Saved[i]);
-        
+        if (firstBG) firstBG.sharedMaterial.SetTextureOffset("_MainTex", savedFirst);
+      
     }
 }

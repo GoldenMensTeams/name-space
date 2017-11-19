@@ -341,15 +341,15 @@ MonoBehaviour:
   ProzX: 5
   firstBG: {fileID: 234574594}
   firstBGSpeed: 0.01
-  secondBG: {fileID: 569605482}
+  secondBG: {fileID: 0}
   secondBGSpeed: 0.03
-  BG3: {fileID: 1132171704}
+  BG3: {fileID: 0}
   BGSpeed3: 0.04
-  BG4: {fileID: 1832999789}
+  BG4: {fileID: 0}
   BGSpeed4: 0.06
-  BG5: {fileID: 1358649981}
+  BG5: {fileID: 0}
   BGSpeed5: 0.02
-  BG6: {fileID: 118358516}
+  BG6: {fileID: 0}
   BGSpeed6: 0.05
 --- !u!1 &234574592
 GameObject:
