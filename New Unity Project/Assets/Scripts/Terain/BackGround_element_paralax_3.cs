@@ -35,11 +35,11 @@ public class BackGround_element_paralax_3 : MonoBehaviour
     
     void MovePoz()
     {
-        //pl.transform.position.x - x + x_list[i]
+        //pl.transform.position.x - x + x_list[i]  y_list_stay[i] + (y - pl.transform.position.y) / ProzY
 
         for (int i = 0; i < Object.Count; i++)
             Object[i].transform.position = new Vector3(Object[i].transform.position.x,
-                y_list_stay[i] + (y - dot.transform.position.y) / ProzY,
+               y_list_stay[i] - (y - dot.transform.position.y)+ProzY,
                 Object[i].transform.position.z);
     }       
 
