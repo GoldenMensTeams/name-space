@@ -29,13 +29,16 @@ public class ControlPle : MonoBehaviour
 
     void Move()
     {
-        CorectROT();
+        //////////////////////////////////////////////////////////////////////////////
+        transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 0);
+        transform.position += position * Time.deltaTime * speed;
+        //////////////////////////////////////////////////////////////////////////////
 
-        position = new Vector3(CnInputManager.GetAxis("Horizontal"), 0f, 0f);
-
-        Debug.Log(position.z);
-
-        if (position.x > 0)
+        if (isJump)
+        {
+            CorectROT();
+            position = new Vector3(CnInputManager.GetAxis("Horizontal"), 0f, 0f);
+            if (position.x > 0)
         {
             if(CnInputManager.GetButton("Run"))
             {
@@ -49,7 +52,7 @@ public class ControlPle : MonoBehaviour
             RandL = true;
             gameG.SetBool("RandL", RandL);
         }
-        else if (position.x < 0)
+            else if (position.x < 0)
         {
             if (CnInputManager.GetButton("Run"))
             {
@@ -64,21 +67,23 @@ public class ControlPle : MonoBehaviour
             RandL = false;
             gameG.SetBool("RandL", RandL);
         }
-        else if (position.x == 0)
+            else if (position.x == 0)
         {
             gameG.SetFloat("MoveX", position.x, 0.1f, Time.deltaTime);
         }
-
-        if (CnInputManager.GetButtonUp("Jump") && isJump)
+            //////////////////////////////////////////////////////////////////////////////
+            if (CnInputManager.GetButtonUp("Jump") && isJump)
         {
             gameG.ResetTrigger("idle");
             gameG.SetTrigger("Jump");           
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, Jump), ForceMode2D.Impulse);
         }
 
-
+            //////////////////////////////////////////////////////////////////////////////
+            Attack();
+        }
     }
-
+    //////////////////////////////////////////////////////////////////////////////
     void Attack()
     {
         if (CnInputManager.GetButtonUp("Attack"))
@@ -98,6 +103,7 @@ public class ControlPle : MonoBehaviour
             //}
         }
     }
+    //////////////////////////////////////////////////////////////////////////////
     void CorectRandL()
     {
         if (RandL)
@@ -106,7 +112,7 @@ public class ControlPle : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 180, 0);
     
     }
-
+    //////////////////////////////////////////////////////////////////////////////
     void CorectROT()
     {
         if (RandL && transform.rotation.y!=0)
@@ -117,23 +123,13 @@ public class ControlPle : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);        
         }
-        Debug.Log("is "+transform.rotation.y);
-        Debug.Log("is " + RandL);
+      
     }
+    //////////////////////////////////////////////////////////////////////////////
     // Update is called once per frame
     void FixedUpdate()
-    {
-        //тут изменить логику, вместо isJupm
-        transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 0);
-
-        Debug.Log(position.z);
-        transform.position += position * Time.deltaTime * speed;
-
-        if (isJump)
-        {
-            Move();
-            Attack();
-        }
+    {    
+            Move();                 
     }
     
     void OnTriggerEnter2D(Collider2D other)

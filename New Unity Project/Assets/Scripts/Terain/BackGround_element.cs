@@ -3,47 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackGround1 : MonoBehaviour
+public class BackGround_element : MonoBehaviour
 {
 
     public GameObject pl;
-
-    private List<float> x_list_stay;
-  
     private float x;
     private float y;
-
     public float ProzY;
     public float ProzX;
-
-    public float height_back_ground;
     public int count_save;
-
-
 
     public List<MeshRenderer> List_Back_Ground;
     public List<float> List_Back_Ground_Speed;
     private List<Vector2> List_Back_Ground_Saved;
 
-
+    private List<float> y_list_stay;
 
     void Start()
     {
-
         x = gameObject.transform.position.x;
         y = gameObject.transform.position.y;
-
-        x_list_stay = new  List<float>();
-       
-
         List_Back_Ground_Saved = new List<Vector2>();
+        y_list_stay=  new List<float>();
         for (int i = 0; i < count_save; i++)
         {
-            x_list_stay.Add(List_Back_Ground[i].transform.position.x);
-          
+            y_list_stay.Add(List_Back_Ground[i].transform.position.y);
             List_Back_Ground_Saved.Add(new Vector2());
         }
-          
+
     }
     //void Move()
     //{
@@ -51,24 +38,31 @@ public class BackGround1 : MonoBehaviour
     //}
     // Update is called once per frame
 
+
+   //transform.position = new Vector3(pl.transform.position.x, y + (y - pl.transform.position.y) / ProzY, transform.position.z);
+    
     void MovePoz()
     {
+        //pl.transform.position.x - x + x_list[i]
+
         for (int i = 0; i < List_Back_Ground.Count; i++)
-            List_Back_Ground[i].transform.position = new Vector3(pl.transform.position.x - x + x_list_stay[i], List_Back_Ground[i].transform.position.y, List_Back_Ground[i].transform.position.z);
-    }
+            List_Back_Ground[i].transform.position = new Vector3(pl.transform.position.x,
+                y_list_stay[i] + (y - pl.transform.position.y) / ProzY,
+                List_Back_Ground[i].transform.position.z);
+    }       
+
     void Move(MeshRenderer mesh, Vector2 savedOffset, float speed)
     {
         Vector2 offset = Vector2.zero;
-        float tmpX = Mathf.Repeat((x * speed), 1);
-        //float tmpX = Mathf.Repeat(-(x + (x - pl.transform.position.x) * speed), 1);
+        float tmpX = Mathf.Repeat(-(x + (x - pl.transform.position.x) / ProzX * speed), 1);
 
         offset = new Vector2(tmpX, savedOffset.y);
         mesh.sharedMaterial.SetTextureOffset("_MainTex", offset);
-    }
+    } 
+
     void FixedUpdate()
     {
-         MovePoz();
-      
+        MovePoz();
     }
 
     void Awake()
