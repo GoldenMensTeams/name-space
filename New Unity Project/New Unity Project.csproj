@@ -143,6 +143,7 @@
     <Compile Include="Assets\Scripts\Menu\MenuClose.cs" />
     <Compile Include="Assets\Scripts\Menu\MenuOpen.cs" />
     <Compile Include="Assets\Scripts\Player\ControlPle.cs" />
+    <Compile Include="Assets\Scripts\Player\ListWeapon.cs" />
     <Compile Include="Assets\Scripts\Terain\BackGround.cs" />
     <Compile Include="Assets\Scripts\Terain\BackGround1.cs" />
     <Compile Include="Assets\Scripts\Terain\BackGround_element.cs" />
@@ -150,6 +151,11 @@
     <Compile Include="Assets\Scripts\Terain\Ground.cs" />
     <Compile Include="Assets\Scripts\Terain\Resp.cs" />
     <Compile Include="Assets\Scripts\Terain\Water.cs" />
+    <Compile Include="Assets\Scripts\enemy\Enemy_1.cs" />
+    <Compile Include="Assets\Scripts\weapons\IParams.cs" />
+    <Compile Include="Assets\Scripts\weapons\IWeapon.cs" />
+    <Compile Include="Assets\Scripts\weapons\Param_damag.cs" />
+    <Compile Include="Assets\Scripts\weapons\Sword.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Model\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />

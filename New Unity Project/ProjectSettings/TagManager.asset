@@ -11,6 +11,8 @@ TagManager:
   - PlayerGui
   - OpenMenu
   - Attack_truncheon
+  - Svord_1
+  - Enemy
   layers:
   - Default
   - TransparentFX

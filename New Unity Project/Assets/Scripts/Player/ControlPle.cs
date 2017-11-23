@@ -2,86 +2,144 @@
 using System.Collections.Generic;
 using UnityEngine;
 using CnControls;
-
+using UnityEngine.UI;
 
 public class ControlPle : MonoBehaviour
 {
+    public Image UIHP;
+
     Vector3 position;
+
+    [SerializeField]
     public float speed = 5f;
+
     private float memor_speed;
+
+    [SerializeField]
     public float run;
-    public float Jump = 5f;
+
+    [SerializeField]
+    public float jump = 5f;
+
     private bool isJump = true;
-    private float MoveX;
+    private float moveX;
     private bool RandL = true;
     private Animator gameG;
+    private SpriteRenderer sprite;
 
+    private SpriteRenderer sprite_weapons;   //времено
+    GameObject Child;
+
+
+    [SerializeField]
+    public float maxHELS = 1f;
+    [SerializeField]
+    public float maxEnerjy = 1f;
+    [SerializeField]
+    public float maxStamina = 1f;
+
+    [SerializeField]
     public float HELS = 1f;
+    [SerializeField]
     public float Enerjy = 1f;
+    [SerializeField]
     public float Stamina = 1f;
 
     // Use this for initialization
     void Start()
-    {
+    {            
         memor_speed = speed;
+       
+    }
+    private void Awake()
+    {
+        Child = gameObject.transform.Find("GorePalca").gameObject;
+        sprite_weapons = Child.GetComponent<SpriteRenderer>(); //времено
+
+        Debug.Log(sprite_weapons);
+      
+        sprite = GetComponent<SpriteRenderer>();
         gameG = GetComponent<Animator>();
     }
+    void HPControl()
+    {
+        UIHP.fillAmount = HELS;
 
+        if (HELS > 1f)
+        {
+            HELS = 1f;
+        }
+        if (HELS < 0)
+        {
+            gameObject.SetActive(false);
+          //  Instantiate(Ragdole, transform.position, transform.rotation);
+        }
+     
+    }
+    public void Damag(float damag)
+    {
+        HELS -= damag;
+    }
     void Move()
     {
         //////////////////////////////////////////////////////////////////////////////
-        transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 0);
+      
         transform.position += position * Time.deltaTime * speed;
         //////////////////////////////////////////////////////////////////////////////
 
-        if (isJump)
-        {
-            CorectROT();
+       // if (isJump)
+       // {
+
+            Corect_flipX();
+            Corect_flipX_sprite_weapons();
+           
             position = new Vector3(CnInputManager.GetAxis("Horizontal"), 0f, 0f);
             if (position.x > 0)
-        {
-            if(CnInputManager.GetButton("Run"))
             {
-                speed = run;             
-            }
-            else {             
-                speed = memor_speed;             
-            }
+                if(CnInputManager.GetButton("Run"))
+                {
+                    speed = run;             
+                }
+                else
+                {             
+                    speed = memor_speed;             
+                }
 
-            gameG.SetFloat("MoveX", position.x, 0.1f, Time.deltaTime);
-            RandL = true;
-            gameG.SetBool("RandL", RandL);
-        }
+                gameG.SetFloat("MoveX", position.x, 0.1f, Time.deltaTime);
+                ///////////////////--------------------------////////////////////////временно не нужно, отслеживает  поворот
+                //RandL = true;
+                //gameG.SetBool("RandL", RandL);
+                ///////////////////--------------------------////////////////////////
+            }
             else if (position.x < 0)
-        {
-            if (CnInputManager.GetButton("Run"))
             {
-                speed = run;               
-            }
-            else
-            {
-                speed = memor_speed;               
-            }
+                if (CnInputManager.GetButton("Run"))
+                {
+                    speed = run;               
+                }
+                else
+                {
+                    speed = memor_speed;               
+                }
 
-            gameG.SetFloat("MoveX", position.x, 0.1f, Time.deltaTime);
-            RandL = false;
-            gameG.SetBool("RandL", RandL);
-        }
+                gameG.SetFloat("MoveX", position.x, 0.1f, Time.deltaTime);
+                ///////////////////--------------------------////////////////////////временно не нужно, временно не нужно, отслеживает  поворот
+                //RandL = false;
+                //gameG.SetBool("RandL", RandL);
+                ///////////////////--------------------------////////////////////////
+            }
             else if (position.x == 0)
-        {
-            gameG.SetFloat("MoveX", position.x, 0.1f, Time.deltaTime);
-        }
+            {
+                gameG.SetFloat("MoveX", position.x, 0.1f, Time.deltaTime);
+            }
             //////////////////////////////////////////////////////////////////////////////
-            if (CnInputManager.GetButtonUp("Jump") && isJump)
-        {
-            gameG.ResetTrigger("idle");
-            gameG.SetTrigger("Jump");           
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, Jump), ForceMode2D.Impulse);
-        }
 
-            //////////////////////////////////////////////////////////////////////////////
+            Jupm();
             Attack();
-        }
+            //////////////////////////////////////////////////////////////////////////////
+          
+      //  }
+       
     }
     //////////////////////////////////////////////////////////////////////////////
     void Attack()
@@ -89,7 +147,7 @@ public class ControlPle : MonoBehaviour
         if (CnInputManager.GetButtonUp("Attack"))
         {
 
-            CorectRandL();
+          
             gameObject.GetComponent<Animator>().SetTrigger("attack");
           
             //if (isJump)
@@ -104,13 +162,22 @@ public class ControlPle : MonoBehaviour
         }
     }
     //////////////////////////////////////////////////////////////////////////////
-    void CorectRandL()
+    void Corect_flipX_sprite_position()
     {
-        if (RandL)
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        else
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-    
+        Child.transform.position = new Vector3(-100, Child.transform.position.y, Child.transform.position.z);
+    }
+    void Corect_flipX_sprite_weapons()
+    {
+        sprite_weapons.flipX = position.x < 0;
+    }
+    void Corect_flipX()
+    {  
+        sprite.flipX = position.x < 0;    
+    }
+    //////////////////////////////////////////////////////////////////////////////
+    void Corect_rotatio()
+    {
+        transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 0);
     }
     //////////////////////////////////////////////////////////////////////////////
     void CorectROT()
@@ -125,13 +192,22 @@ public class ControlPle : MonoBehaviour
         }
       
     }
+    void Jupm()
+    {
+        if (CnInputManager.GetButtonUp("Jump") && isJump)
+        {
+            gameG.ResetTrigger("idle");
+            gameG.SetTrigger("Jump");
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jump), ForceMode2D.Impulse);
+        }
+    }
     //////////////////////////////////////////////////////////////////////////////
     // Update is called once per frame
     void FixedUpdate()
-    {    
+    {
+        HPControl();
             Move();                 
-    }
-    
+    }   
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Ground")
