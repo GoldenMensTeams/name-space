@@ -215,13 +215,7 @@ public class ControlPle : MonoBehaviour
     }
     //////////////////////////////////////////////////////////////////////////////
 
-    void ProvDown()
-    {
-        if(isDown)
-        {
-
-        }
-    }
+   
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -248,7 +242,7 @@ public class ControlPle : MonoBehaviour
 
             gameObject.GetComponent<Animator>().SetTrigger("Jump");
             isJump = false;
-            ImisJump = true;
+         
         }
         else if (other.tag == "Ground" && !ImisJump)
         {
