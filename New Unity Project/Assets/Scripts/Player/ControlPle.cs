@@ -20,10 +20,12 @@ public class ControlPle : MonoBehaviour
 
     [SerializeField]
     public float jump = 5f;
-
-    private bool isJump = true;
     private float moveX;
+    private bool isJump = true;
+    private bool ImisJump=false;
+    private bool isDown = false;
     private bool RandL = true;
+
     private Animator gameG;
     private SpriteRenderer sprite;
 
@@ -53,13 +55,14 @@ public class ControlPle : MonoBehaviour
     }
     private void Awake()
     {
-        Child = gameObject.transform.Find("GorePalca").gameObject;
-        sprite_weapons = Child.GetComponent<SpriteRenderer>(); //времено
+       Child = gameObject.transform.Find("Weapon_1").gameObject;
+       //sprite_weapons = Child.GetComponent<SpriteRenderer>(); //времено
 
-        Debug.Log(sprite_weapons);
+       
       
         sprite = GetComponent<SpriteRenderer>();
         gameG = GetComponent<Animator>();
+       
     }
     void HPControl()
     {
@@ -107,8 +110,8 @@ public class ControlPle : MonoBehaviour
 
                 gameG.SetFloat("MoveX", position.x, 0.1f, Time.deltaTime);
                 ///////////////////--------------------------////////////////////////временно не нужно, отслеживает  поворот
-                //RandL = true;
-                //gameG.SetBool("RandL", RandL);
+                RandL = true;
+                gameG.SetBool("RandL", RandL);
                 ///////////////////--------------------------////////////////////////
             }
             else if (position.x < 0)
@@ -124,8 +127,8 @@ public class ControlPle : MonoBehaviour
 
                 gameG.SetFloat("MoveX", position.x, 0.1f, Time.deltaTime);
                 ///////////////////--------------------------////////////////////////временно не нужно, временно не нужно, отслеживает  поворот
-                //RandL = false;
-                //gameG.SetBool("RandL", RandL);
+                RandL = false;
+                gameG.SetBool("RandL", RandL);
                 ///////////////////--------------------------////////////////////////
             }
             else if (position.x == 0)
@@ -168,11 +171,19 @@ public class ControlPle : MonoBehaviour
     }
     void Corect_flipX_sprite_weapons()
     {
-        sprite_weapons.flipX = position.x < 0;
+        if (position.x < 0 || !RandL)
+            Child.transform.position = new Vector3(transform.position.x - 1.9f, Child.transform.position.y, Child.transform.position.z);
+        else
+            Child.transform.position = new Vector3(transform.position.x + 1.9f, Child.transform.position.y, Child.transform.position.z);
+
+
     }
     void Corect_flipX()
     {  
-        sprite.flipX = position.x < 0;    
+        if(position.x < 0 || !RandL)
+        sprite.flipX = !RandL;   
+        else
+        sprite.flipX = position.x < 0;
     }
     //////////////////////////////////////////////////////////////////////////////
     void Corect_rotatio()
@@ -199,9 +210,18 @@ public class ControlPle : MonoBehaviour
             gameG.ResetTrigger("idle");
             gameG.SetTrigger("Jump");
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jump), ForceMode2D.Impulse);
+            ImisJump = true;
         }
     }
     //////////////////////////////////////////////////////////////////////////////
+
+    void ProvDown()
+    {
+        if(isDown)
+        {
+
+        }
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -216,17 +236,23 @@ public class ControlPle : MonoBehaviour
             gameObject.GetComponent<Animator>().SetTrigger("idle");
             gameObject.GetComponent<Animator>().ResetTrigger("Jump");
 
-
+            ImisJump = false;
             isJump = true;
         }
 
     }
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Ground")
+        if (other.tag == "Ground"&& ImisJump)
         {
 
             gameObject.GetComponent<Animator>().SetTrigger("Jump");
+            isJump = false;
+            ImisJump = true;
+        }
+        else if (other.tag == "Ground" && !ImisJump)
+        {
+            gameObject.GetComponent<Animator>().SetTrigger("Down");
             isJump = false;
         }
     }
