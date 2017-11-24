@@ -144,6 +144,7 @@
     <Compile Include="Assets\Scripts\Player\ControlPle.cs" />
     <Compile Include="Assets\Scripts\Player\ListWeapon.cs" />
     <Compile Include="Assets\Scripts\Player\StatusBar.cs" />
+    <Compile Include="Assets\Scripts\Reset.cs" />
     <Compile Include="Assets\Scripts\Terain\BackGround.cs" />
     <Compile Include="Assets\Scripts\Terain\BackGround1.cs" />
     <Compile Include="Assets\Scripts\Terain\BackGround_element.cs" />

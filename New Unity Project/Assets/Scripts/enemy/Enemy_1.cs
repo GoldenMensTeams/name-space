@@ -7,7 +7,7 @@ public class Enemy_1 : MonoBehaviour {
 
 
     public float HP = 5f;
-    public float maxHP;
+    public float maxHP=5f;
     public Image UIHP;
     public Image UIHP1;
 
