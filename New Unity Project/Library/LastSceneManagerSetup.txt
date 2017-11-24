@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scens/mamory.unity
+- path: Assets/Scens/Menu.unity
   isLoaded: 1
   isActive: 1
