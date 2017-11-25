@@ -205,6 +205,7 @@ public class ControlPle : MonoBehaviour
     }
     void Jupm()
     {
+        
         if (CnInputManager.GetButtonUp("Jump") && isJump)
         {
             gameG.ResetTrigger("idle");

@@ -19,8 +19,7 @@ public class Enemy_1 : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         UIHP.fillAmount = HP / 5;
-        UIHP.gameObject.transform.position = new Vector3 (transform.position.x, transform.position.y+2f, transform.position.z);
-        UIHP1.gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
+       
         if (HP<=0)
         {
             gameObject.SetActive(false);
@@ -37,5 +36,13 @@ public class Enemy_1 : MonoBehaviour {
           other.GetComponent<ControlPle>().Damag(0.1f);        
         }
       
+    }
+    private void OnGUI()
+    {
+       // UIHP.gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
+       // UIHP1.gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
+
+        Vector3 posScr = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+       
     }
 }
