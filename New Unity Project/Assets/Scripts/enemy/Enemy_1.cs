@@ -8,15 +8,46 @@ public class Enemy_1 : MonoBehaviour {
 
     public float HP = 5f;
     public float maxHP=5f;
+    public float Attack = 0.1f;
+
+    private bool agresiv;
+    private bool patrul;
+    private bool serch;
+
     public Image UIHP;
     public Image UIHP1;
 
     // Use this for initialization
     void Start () {
-		
-	}
+        agresiv = false;
+        patrul = true;
+        serch = false;
+    }
 	
 	// Update is called once per frame
+    void Move()
+    {
+        if(patrul)
+        {
+            Patrul();
+        }
+    }
+    void Agresiv()
+    {
+
+    }
+    void Patrul()
+    {
+
+    }
+    void Serch()
+    {
+
+    }
+    void ChecPleayr()
+    {
+
+    }
 	void FixedUpdate () {
         UIHP.fillAmount = HP / 5;
        
@@ -33,7 +64,7 @@ public class Enemy_1 : MonoBehaviour {
     {
         if (other.tag == "Player1")
         {
-          other.GetComponent<ControlPle>().Damag(0.1f);        
+          other.GetComponent<ControlPle>().Damag(Attack);        
         }
       
     }

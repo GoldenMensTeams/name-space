@@ -10,15 +10,15 @@ public class ControlPle : MonoBehaviour
 
     Vector3 position;
 
-    [SerializeField]
+   
     public float speed = 5f;
 
     private float memor_speed;
 
-    [SerializeField]
+   
     public float run;
 
-    [SerializeField]
+    
     public float jump = 5f;
     private float moveX;
     private bool isJump = true;
@@ -33,18 +33,18 @@ public class ControlPle : MonoBehaviour
     GameObject Child;
 
 
-    [SerializeField]
+   
     public float maxHELS = 1f;
-    [SerializeField]
+    
     public float maxEnerjy = 1f;
-    [SerializeField]
+    
     public float maxStamina = 1f;
 
-    [SerializeField]
+   
     public float HELS = 1f;
-    [SerializeField]
+   
     public float Enerjy = 1f;
-    [SerializeField]
+    
     public float Stamina = 1f;
 
     // Use this for initialization
