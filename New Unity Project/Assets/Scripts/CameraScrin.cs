@@ -15,7 +15,7 @@ public class CameraScrin : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
-        transform.position = new Vector3(pl.transform.position.x, pl.transform.position.y+ height_camera, -10f);
+        transform.position = new Vector3(pl.transform.position.x, pl.transform.position.y+ height_camera, transform.position.z);
 
 	}
 }

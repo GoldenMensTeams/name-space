@@ -10,56 +10,45 @@ public class ControlPle : MonoBehaviour
 
     Vector3 position;
 
-   
+    
+
     public float speed = 5f;
-
     private float memor_speed;
-
-   
     public float run;
 
     
     public float jump = 5f;
     private float moveX;
-    private bool isJump = true;
-    private bool ImisJump=false;
+    private bool isJump = true; 
     private bool isDown = false;
     private bool RandL = true;
 
     private Animator gameG;
     private SpriteRenderer sprite;
+    private Rigidbody2D g_Rigidbody2D;
 
-    private SpriteRenderer sprite_weapons;   //времено
     GameObject Child;
-
-
-   
-    public float maxHELS = 1f;
-    
-    public float maxEnerjy = 1f;
-    
+  
+    public float maxHELS = 1f;   
+    public float maxEnerjy = 1f;  
     public float maxStamina = 1f;
 
    
-    public float HELS = 1f;
-   
-    public float Enerjy = 1f;
-    
+    public float HELS = 1f;   
+    public float Enerjy = 1f;  
     public float Stamina = 1f;
 
     // Use this for initialization
     void Start()
     {            
-        memor_speed = speed;
-       
+        memor_speed = speed;       
     }
     private void Awake()
     {
        Child = gameObject.transform.Find("Weapon_1").gameObject;
-       //sprite_weapons = Child.GetComponent<SpriteRenderer>(); //времено
+        //sprite_weapons = Child.GetComponent<SpriteRenderer>(); //времено
 
-       
-      
+        g_Rigidbody2D = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         gameG = GetComponent<Animator>();
        
@@ -74,10 +63,8 @@ public class ControlPle : MonoBehaviour
         }
         if (HELS < 0)
         {
-            gameObject.SetActive(false);
-          //  Instantiate(Ragdole, transform.position, transform.rotation);
-        }
-     
+            gameObject.SetActive(false);        
+        }    
     }
     public void Damag(float damag)
     {
@@ -86,13 +73,9 @@ public class ControlPle : MonoBehaviour
     void Move()
     {
         //////////////////////////////////////////////////////////////////////////////
-      
+        gameG.SetFloat("vSpeed", g_Rigidbody2D.velocity.y);
         transform.position += position * Time.deltaTime * speed;
         //////////////////////////////////////////////////////////////////////////////
-
-       // if (isJump)
-       // {
-
             Corect_flipX();
             Corect_flipX_sprite_weapons();
            
@@ -106,9 +89,7 @@ public class ControlPle : MonoBehaviour
                 else
                 {             
                     speed = memor_speed;             
-                }
-
-                gameG.SetFloat("MoveX", position.x, 0.1f, Time.deltaTime);
+                }              
                 ///////////////////--------------------------////////////////////////временно не нужно, отслеживает  поворот
                 RandL = true;
                 gameG.SetBool("RandL", RandL);
@@ -123,60 +104,34 @@ public class ControlPle : MonoBehaviour
                 else
                 {
                     speed = memor_speed;               
-                }
-
-                gameG.SetFloat("MoveX", position.x, 0.1f, Time.deltaTime);
+                }             
                 ///////////////////--------------------------////////////////////////временно не нужно, временно не нужно, отслеживает  поворот
                 RandL = false;
                 gameG.SetBool("RandL", RandL);
                 ///////////////////--------------------------////////////////////////
-            }
-            else if (position.x == 0)
-            {
+            }        
                 gameG.SetFloat("MoveX", position.x, 0.1f, Time.deltaTime);
-            }
-            //////////////////////////////////////////////////////////////////////////////
-
+                    
             Jupm();
-            Attack();
-            //////////////////////////////////////////////////////////////////////////////
-          
-      //  }
-       
+            Attack();                     
     }
     //////////////////////////////////////////////////////////////////////////////
     void Attack()
     {
         if (CnInputManager.GetButtonUp("Attack"))
-        {
-
-          
+        {        
             gameObject.GetComponent<Animator>().SetTrigger("attack");
-          
-            //if (isJump)
-            //{
-            //    gameObject.GetComponent<Animator>().SetTrigger("idle");
-            //}
-            //else
-            //{
-            //    gameObject.GetComponent<Animator>().SetTrigger("Jump");
-            //    gameObject.GetComponent<Animator>().ResetTrigger("idle");
-            //}
+                   
         }
     }
     //////////////////////////////////////////////////////////////////////////////
-    void Corect_flipX_sprite_position()
-    {
-        Child.transform.position = new Vector3(-100, Child.transform.position.y, Child.transform.position.z);
-    }
+
     void Corect_flipX_sprite_weapons()
     {
         if (position.x < 0 || !RandL)
             Child.transform.position = new Vector3(transform.position.x - 1.9f, Child.transform.position.y, Child.transform.position.z);
         else
             Child.transform.position = new Vector3(transform.position.x + 1.9f, Child.transform.position.y, Child.transform.position.z);
-
-
     }
     void Corect_flipX()
     {  
@@ -185,6 +140,7 @@ public class ControlPle : MonoBehaviour
         else
         sprite.flipX = position.x < 0;
     }
+
     //////////////////////////////////////////////////////////////////////////////
     void Corect_rotatio()
     {
@@ -204,14 +160,10 @@ public class ControlPle : MonoBehaviour
       
     }
     void Jupm()
-    {
-        
+    {        
         if (CnInputManager.GetButtonUp("Jump") && isJump)
-        {
-            gameG.ResetTrigger("idle");
-            gameG.SetTrigger("Jump");
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jump), ForceMode2D.Impulse);
-            ImisJump = true;
+        {         
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jump), ForceMode2D.Impulse);         
         }
     }
     //////////////////////////////////////////////////////////////////////////////
@@ -227,29 +179,19 @@ public class ControlPle : MonoBehaviour
     {
         if (other.tag == "Ground")
         {
-
-            gameObject.GetComponent<Animator>().SetTrigger("idle");
-            gameObject.GetComponent<Animator>().ResetTrigger("Jump");
-
-            ImisJump = false;
+            gameG.SetBool("Ground", true);                
             isJump = true;
         }
 
     }
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Ground"&& ImisJump)
+        if (other.tag == "Ground")
         {
-
-            gameObject.GetComponent<Animator>().SetTrigger("Jump");
-            isJump = false;
-         
+            gameG.SetBool("Ground", false);         
+            isJump = false;      
         }
-        else if (other.tag == "Ground" && !ImisJump)
-        {
-            gameObject.GetComponent<Animator>().SetTrigger("Down");
-            isJump = false;
-        }
+    
     }
 
 
