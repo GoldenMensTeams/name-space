@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.6.4f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -179,6 +181,7 @@
     <Compile Include="Assets\Scripts\Terain\Water.cs" />
     <Compile Include="Assets\Scripts\Tutorial\Scripts\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Tutorial\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\Unit.cs" />
     <Compile Include="Assets\Scripts\enemy\BasseEnemy.cs" />
     <Compile Include="Assets\Scripts\enemy\Enemy_1.cs" />
     <Compile Include="Assets\Scripts\weapons\Head.cs" />

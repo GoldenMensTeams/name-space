@@ -4,7 +4,7 @@ using UnityEngine;
 using CnControls;
 using UnityEngine.UI;
 
-public class ControlPle : MonoBehaviour
+public class ControlPle : Unit
 {
     public Image UIHP;
 
@@ -19,9 +19,9 @@ public class ControlPle : MonoBehaviour
     
     public float jump = 5f;
     private float moveX;
-    private bool isJump = true; 
     private bool isDown = false;
     private bool RandL = true;
+    private bool isGrounded = false;
 
     private Animator gameG;
     private SpriteRenderer sprite;
@@ -142,36 +142,44 @@ public class ControlPle : MonoBehaviour
     }
 
     //////////////////////////////////////////////////////////////////////////////
-    void Corect_rotatio()
-    {
-        transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 0);
-    }
+  
     //////////////////////////////////////////////////////////////////////////////
-    void CorectROT()
-    {
-        if (RandL && transform.rotation.y!=0)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        else if (!RandL && transform.rotation.y != -1)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);        
-        }
-      
-    }
     void Jupm()
     {        
-        if (CnInputManager.GetButtonUp("Jump") && isJump)
+        if (CnInputManager.GetButtonUp("Jump") && isGrounded)
         {         
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jump), ForceMode2D.Impulse);         
         }
     }
     //////////////////////////////////////////////////////////////////////////////
 
+    void CheckGrounded()
+    {
+      
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(new Vector2(transform.position.x,transform.position.y - 1.5f),0.3f);
+        foreach (Collider2D c in colliders)
+        {
+            if (c.tag == "Ground")
+            {
+                isGrounded = true;
+                gameG.SetBool("Ground", true);
+              
+                return;
+            }
+            else
+            {
+                gameG.SetBool("Ground", false);
+                isGrounded = false;
+            }
+                              
+        }
+        
+    }
    
     // Update is called once per frame
     void FixedUpdate()
     {
+        CheckGrounded();
         HPControl();
             Move();                 
     }   
@@ -179,8 +187,8 @@ public class ControlPle : MonoBehaviour
     {
         if (other.tag == "Ground")
         {
-            gameG.SetBool("Ground", true);                
-            isJump = true;
+            gameG.SetBool("Ground", true);
+            isGrounded = true;
         }
 
     }
@@ -188,8 +196,8 @@ public class ControlPle : MonoBehaviour
     {
         if (other.tag == "Ground")
         {
-            gameG.SetBool("Ground", false);         
-            isJump = false;      
+            gameG.SetBool("Ground", false);
+            isGrounded = false;      
         }
     
     }

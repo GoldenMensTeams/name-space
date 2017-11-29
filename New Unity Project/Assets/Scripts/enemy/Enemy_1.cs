@@ -9,7 +9,7 @@ enum status
     serch = 1,
     agresiv = 2
 } 
-public class Enemy_1 : MonoBehaviour
+public class Enemy_1 : BasseEnemy
 {
 
     status isStatus;
@@ -28,8 +28,8 @@ public class Enemy_1 : MonoBehaviour
     private Rigidbody2D g_Rigidbody2D;
     private SpriteRenderer g_SpriteRenderer;
     private Animator g_Animator;
+    private Vector3 direction;
 
-   
 
     public Image UIHP;
     public Image UIHP1;
@@ -51,6 +51,9 @@ public class Enemy_1 : MonoBehaviour
     // Update is called once per frame
     void Move()
     {
+
+
+
         g_SpriteRenderer.flipX = inRight;
         switch (isStatus)
         {
@@ -82,73 +85,79 @@ public class Enemy_1 : MonoBehaviour
     }
     void Patrul()
     {
-        if (inRight)
-        {
-            g_Rigidbody2D.velocity = new Vector2(-speed, g_Rigidbody2D.velocity.y);
-            g_Animator.SetFloat("MoveX", -speed);
-        }
-        else
-        {
-            g_Rigidbody2D.velocity = new Vector2(speed, g_Rigidbody2D.velocity.y);
-            g_Animator.SetFloat("MoveX", speed);
-        }
-        g_Animator.SetBool("Run", false);
+        //if (inRight)
+        //{
+        //    g_Rigidbody2D.velocity = new Vector2(-speed, g_Rigidbody2D.velocity.y);
+        //    g_Animator.SetFloat("MoveX", -speed);
+        //}
+        //else
+        //{
+        //    g_Rigidbody2D.velocity = new Vector2(speed, g_Rigidbody2D.velocity.y);
+        //    g_Animator.SetFloat("MoveX", speed);
+        //}
+        //g_Animator.SetBool("Run", false);
     }
     void Serch()
     {
 
     }
-    void ChecPleayr(Collider2D other)
+    void ChecPleayr()
     {
-        if (other.tag == "Player1")     
+        // Collider2D[] colliders = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + 3f, transform.position.y), new Vector2(2.5f, 7),90);
+
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position+transform.right*, new Vector2(2.5f, 7), 90);
+        foreach (Collider2D c in colliders)
         {
-            isStatus = status.agresiv;
-            ChecAttack(other);
+            if (c.tag == "Player1")
+            {             
+                isStatus = status.agresiv;
+                ChecAttack(c);
+            }
         }
     }
-    void ChecAttack(Collider2D other)
+    void ChecAttack(Collider2D colliders)
     {
-        if (other.tag == "Player1"&& 
-            other.transform.position.x- transform.position.x>=-2&& 
-            other.transform.position.x - transform.position.x <= 2)
+        if (colliders.tag == "Player1"&&
+            colliders.transform.position.x- transform.position.x>=0&&
+            colliders.transform.position.x - transform.position.x <= 2)
         {
             Attack();
         }
     }
-    void ChecWall(Collider2D other)
-    {
-        if (other.tag == "Wall")
-        {
-            inRight = !inRight;
+    //void ChecWall(Collider2D other)
+    //{
+    //    if (other.tag == "Wall")
+    //    {
+    //        inRight = !inRight;
 
-        }
-    }
+    //    }
+    //}
 
     void FixedUpdate()
-    {
-
-        isStatus = 0;
-       
-
-
+    {      
+        isStatus = 0;      
         UIHP.fillAmount = HP / 5;
         if (HP <= 0)
         {
             gameObject.SetActive(false);
         }
 
+        ChecPleayr();
         Move();
-
     }
     public void Damag(float damag)
     {
         HP -= damag;
     }
+    void Attack()
+    {
+        gameObject.GetComponent<Animator>().SetTrigger("attack");
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
-        ChecPleayr(other);
+       
 
-        ChecWall(other);
+       // ChecWall(other);
 
         if (other.tag == "Ground")
         {
@@ -164,10 +173,7 @@ public class Enemy_1 : MonoBehaviour
 
 
     }
-    void Attack()
-    {
-            gameObject.GetComponent<Animator>().SetTrigger("attack");
-    }
+   
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag == "Ground")

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasseEnemy : MonoBehaviour {
+public class BasseEnemy : Unit
+{
 
 	// Use this for initialization
 	void Start () {
