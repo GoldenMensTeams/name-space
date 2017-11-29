@@ -7,7 +7,8 @@ enum status
 {
     patrul = 0,
     serch = 1,
-    agresiv = 2
+    agresiv = 2,
+    stayAgresiv = 3
 } 
 public class Enemy_1 : BasseEnemy
 {
@@ -38,8 +39,11 @@ public class Enemy_1 : BasseEnemy
 
     void Start()
     {
-
+        direction = transform.right;
         isStatus = status.patrul;
+        g_Rigidbody2D = GetComponent<Rigidbody2D>();
+        g_SpriteRenderer = GetComponent<SpriteRenderer>();
+        g_Animator = GetComponent<Animator>();
     }
     private void Awake()
     {
@@ -47,12 +51,38 @@ public class Enemy_1 : BasseEnemy
         g_SpriteRenderer = GetComponent<SpriteRenderer>();
         g_Animator = GetComponent<Animator>();
     }
+    void CheckGround()
+    {
+        Collider2D[] colliders1 = Physics2D.OverlapCircleAll(transform.position + transform.up * -1, 0.2F);
+     
+        foreach (Collider2D c in colliders1)
+            if (c.tag == "Ground")
+            {
+                g_Rigidbody2D.velocity = new Vector2(g_Rigidbody2D.velocity.x, c.transform.position.y + 4);
 
+                gameObject.transform.position = new Vector3(gameObject.transform.position.x,
+                    c.transform.position.y + 4,
+                    gameObject.transform.position.z);
+
+                g_Animator.SetBool("Ground", true);
+            }
+    }
     // Update is called once per frame
     void Move()
     {
 
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position + transform.right * direction.x, 0.2F);
 
+        foreach (Collider2D c in colliders)
+            if (c.tag == "Wall" || c.tag == "Ground")
+            {
+               
+                inRight = !inRight;
+                direction *= -1.0f;
+            }
+
+
+        CheckGround();
 
         g_SpriteRenderer.flipX = inRight;
         switch (isStatus)
@@ -66,25 +96,34 @@ public class Enemy_1 : BasseEnemy
             case status.serch:
                 Serch();
                 break;
+            case status.stayAgresiv:
+                break; 
         }      
     }
     void Agresiv()
-    {
-        if (inRight)
-        {
-            g_Rigidbody2D.velocity = new Vector2(-run, g_Rigidbody2D.velocity.y);
-            g_Animator.SetFloat("MoveX", -run);
-
-        }
-        else
-        {
-            g_Rigidbody2D.velocity = new Vector2(run, g_Rigidbody2D.velocity.y);
-            g_Animator.SetFloat("MoveX", run);
-        }
+    {     
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, run + Time.deltaTime);
+        g_Animator.SetFloat("MoveX", run * direction.x);
         g_Animator.SetBool("Run", true);
+
+        //if (inRight)
+        //{
+        //    g_Rigidbody2D.velocity = new Vector2(-run, g_Rigidbody2D.velocity.y);
+        //    g_Animator.SetFloat("MoveX", -run);
+        //}
+        //else
+        //{
+        //    g_Rigidbody2D.velocity = new Vector2(run, g_Rigidbody2D.velocity.y);
+        //    g_Animator.SetFloat("MoveX", run);
+        //}
+        //g_Animator.SetBool("Run", true);
     }
     void Patrul()
-    {
+    {     
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, speed + Time.deltaTime);
+        g_Animator.SetFloat("MoveX", speed * direction.x);
+        g_Animator.SetBool("Run", false);
+
         //if (inRight)
         //{
         //    g_Rigidbody2D.velocity = new Vector2(-speed, g_Rigidbody2D.velocity.y);
@@ -154,9 +193,7 @@ public class Enemy_1 : BasseEnemy
         gameObject.GetComponent<Animator>().SetTrigger("attack");
     }
     void OnTriggerEnter2D(Collider2D other)
-    {
-       
-
+    {      
        // ChecWall(other);
 
         if (other.tag == "Ground")
@@ -170,8 +207,6 @@ public class Enemy_1 : BasseEnemy
             g_Animator.SetBool("Ground", true);
             //isJump = true;
         }
-
-
     }
    
     void OnTriggerExit2D(Collider2D other)
