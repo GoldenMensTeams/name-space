@@ -105,7 +105,7 @@ public class Enemy_1 : BasseEnemy
     {
         // Collider2D[] colliders = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + 3f, transform.position.y), new Vector2(2.5f, 7),90);
 
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position+transform.right*, new Vector2(2.5f, 7), 90);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position+transform.right, new Vector2(2.5f, 7), 90);
         foreach (Collider2D c in colliders)
         {
             if (c.tag == "Player1")
