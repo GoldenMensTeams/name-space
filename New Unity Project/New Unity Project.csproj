@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.6.4f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -175,14 +173,18 @@
     <Compile Include="Assets\Scripts\PlayerGui\ClicButton.cs" />
     <Compile Include="Assets\Scripts\Reset.cs" />
     <Compile Include="Assets\Scripts\Spavn\Spavn_1.cs" />
+    <Compile Include="Assets\Scripts\Terain\BGScrol.cs" />
     <Compile Include="Assets\Scripts\Terain\BackGround.cs" />
     <Compile Include="Assets\Scripts\Terain\BackGround1.cs" />
     <Compile Include="Assets\Scripts\Terain\BackGround_element.cs" />
     <Compile Include="Assets\Scripts\Terain\BackGround_element_paralax_3.cs" />
-    <Compile Include="Assets\Scripts\Terain\BGScrol.cs" />
     <Compile Include="Assets\Scripts\Terain\Ground.cs" />
     <Compile Include="Assets\Scripts\Terain\Resp.cs" />
     <Compile Include="Assets\Scripts\Terain\Water.cs" />
+    <Compile Include="Assets\Scripts\Traps\BaseTrap.cs" />
+    <Compile Include="Assets\Scripts\Traps\LiveTrap.cs" />
+    <Compile Include="Assets\Scripts\Traps\PoisonousTrap.cs" />
+    <Compile Include="Assets\Scripts\Traps\StikchingTrap.cs" />
     <Compile Include="Assets\Scripts\Tutorial\Scripts\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Tutorial\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Unit.cs" />

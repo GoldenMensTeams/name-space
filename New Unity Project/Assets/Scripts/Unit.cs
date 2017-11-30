@@ -10,8 +10,11 @@ public abstract class Unit : MonoBehaviour {
     protected bool freez = true;
 
     public virtual void ReciveDamage(float _damag) { }
+    private void Start()
+    {
+        
+    }
 
-       
     public virtual void Die()
     {
         Destroy(gameObject);
