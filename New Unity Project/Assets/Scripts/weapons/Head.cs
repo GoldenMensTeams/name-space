@@ -12,7 +12,8 @@ public class Head : MonoBehaviour
     {
         if (other.tag == "Player1")
         {
-            other.GetComponent<ControlPle>().Damag(damag);          
+            
+            other.GetComponent<Unit>().ReciveDamage(damag);          
         }
     }
 }

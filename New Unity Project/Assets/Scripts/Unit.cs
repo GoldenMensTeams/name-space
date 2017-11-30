@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit : MonoBehaviour {
+public abstract class Unit : MonoBehaviour {
 
-	public virtual void ReciveDamage()
-    {
-        Die();
-    }
+    public float maxHELS = 1f;
+    public float HELS = 1f;
+    public float speed = 5f;
 
+    public virtual void ReciveDamage(float _damag) { }
+
+       
     public virtual void Die()
     {
         Destroy(gameObject);
     }
+
 }

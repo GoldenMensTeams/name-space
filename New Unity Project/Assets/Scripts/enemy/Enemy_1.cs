@@ -12,28 +12,26 @@ enum status
 } 
 public class Enemy_1 : BasseEnemy
 {
-
+   
     status isStatus;
-    public float HP = 5f;
-    public float maxHP = 5f;
+ 
     public float attack = 0.1f;
 
-    public float speed = 5f;
-    private float memor_speed;
+  
+   
     public float run = 10f;
 
     public bool inRight = false;
-
-  
 
     private Rigidbody2D g_Rigidbody2D;
     private SpriteRenderer g_SpriteRenderer;
     private Animator g_Animator;
     private Vector3 direction;
 
+    GameObject Child;
 
-    public Image UIHP;
-    public Image UIHP1;
+    public Image UIHP=null;
+    
 
     // Use this for initialization
 
@@ -41,12 +39,15 @@ public class Enemy_1 : BasseEnemy
     {
         direction = transform.right;
         isStatus = status.patrul;
-        g_Rigidbody2D = GetComponent<Rigidbody2D>();
-        g_SpriteRenderer = GetComponent<SpriteRenderer>();
-        g_Animator = GetComponent<Animator>();
+      
+
+       
     }
     private void Awake()
     {
+        Child = gameObject.transform.Find("Attact").gameObject;
+              
+
         g_Rigidbody2D = GetComponent<Rigidbody2D>();
         g_SpriteRenderer = GetComponent<SpriteRenderer>();
         g_Animator = GetComponent<Animator>();
@@ -54,7 +55,8 @@ public class Enemy_1 : BasseEnemy
     void CheckGround()
     {
         Collider2D[] colliders1 = Physics2D.OverlapCircleAll(transform.position + transform.up * -1, 0.2F);
-     
+        g_Animator.SetBool("Ground", false);
+
         foreach (Collider2D c in colliders1)
             if (c.tag == "Ground")
             {
@@ -64,27 +66,37 @@ public class Enemy_1 : BasseEnemy
                     c.transform.position.y + 4,
                     gameObject.transform.position.z);
 
-                g_Animator.SetBool("Ground", true);
+                g_Animator.SetBool("Ground", true);              
+            }      
+    }
+    void ChecWall()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position + transform.right * direction.x, 0.2F);
+        foreach (Collider2D c in colliders)
+            if (c.tag == "Wall" || c.tag == "Ground")
+            {
+
+                inRight = !inRight;
+                direction *= -1.0f;
             }
+    }
+    void Corect_flipX_sprite_weapons()
+    {
+        if (!inRight)
+            Child.transform.position = new Vector3(transform.position.x + 1.8f, Child.transform.position.y, Child.transform.position.z);
+        else
+            Child.transform.position = new Vector3(transform.position.x - 1.8f, Child.transform.position.y, Child.transform.position.z);
     }
     // Update is called once per frame
     void Move()
     {
-
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position + transform.right * direction.x, 0.2F);
-
-        foreach (Collider2D c in colliders)
-            if (c.tag == "Wall" || c.tag == "Ground")
-            {
-               
-                inRight = !inRight;
-                direction *= -1.0f;
-            }
-
-
+        ChecWall();
         CheckGround();
 
         g_SpriteRenderer.flipX = inRight;
+        Corect_flipX_sprite_weapons();
+
+
         switch (isStatus)
         {
             case status.agresiv:
@@ -96,59 +108,48 @@ public class Enemy_1 : BasseEnemy
             case status.serch:
                 Serch();
                 break;
-            case status.stayAgresiv:
-                break; 
+           
         }      
     }
     void Agresiv()
-    {     
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, run + Time.deltaTime);
-        g_Animator.SetFloat("MoveX", run * direction.x);
-        g_Animator.SetBool("Run", true);
-
-        //if (inRight)
-        //{
-        //    g_Rigidbody2D.velocity = new Vector2(-run, g_Rigidbody2D.velocity.y);
-        //    g_Animator.SetFloat("MoveX", -run);
-        //}
-        //else
-        //{
-        //    g_Rigidbody2D.velocity = new Vector2(run, g_Rigidbody2D.velocity.y);
-        //    g_Animator.SetFloat("MoveX", run);
-        //}
-        //g_Animator.SetBool("Run", true);
+    {
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position + transform.right * 3f * direction.x, new Vector2(2.5f, 7), 90);
+       
+        foreach (Collider2D c in colliders)
+        {
+            if (c.tag == "Player1" &&
+               Mathf.Abs(c.transform.position.x - transform.position.x) >= 2)
+            { 
+                    transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, run + Time.deltaTime);
+                    g_Animator.SetFloat("MoveX", run * direction.x);
+                    g_Animator.SetBool("Run", true);
+            }
+            else if (c.tag == "Player1" &&
+                    Mathf.Abs(c.transform.position.x - transform.position.x) < 2 &&
+                    Mathf.Abs(c.transform.position.x - transform.position.x) >= 0)
+                 {
+                    g_Animator.SetFloat("MoveX", 0);
+                    g_Animator.SetBool("Run", false);
+                 }
+        }
     }
     void Patrul()
     {     
         transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, speed + Time.deltaTime);
         g_Animator.SetFloat("MoveX", speed * direction.x);
-        g_Animator.SetBool("Run", false);
-
-        //if (inRight)
-        //{
-        //    g_Rigidbody2D.velocity = new Vector2(-speed, g_Rigidbody2D.velocity.y);
-        //    g_Animator.SetFloat("MoveX", -speed);
-        //}
-        //else
-        //{
-        //    g_Rigidbody2D.velocity = new Vector2(speed, g_Rigidbody2D.velocity.y);
-        //    g_Animator.SetFloat("MoveX", speed);
-        //}
-        //g_Animator.SetBool("Run", false);
+        g_Animator.SetBool("Run", false);     
     }
     void Serch()
     {
 
     }
     void ChecPleayr()
-    {
-        // Collider2D[] colliders = Physics2D.OverlapBoxAll(new Vector2(transform.position.x + 3f, transform.position.y), new Vector2(2.5f, 7),90);
-
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position+transform.right, new Vector2(2.5f, 7), 90);
+    {      
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position+transform.right*3f * direction.x, new Vector2(2.5f, 7), 90);
         foreach (Collider2D c in colliders)
         {
             if (c.tag == "Player1")
-            {             
+            {              
                 isStatus = status.agresiv;
                 ChecAttack(c);
             }
@@ -157,36 +158,38 @@ public class Enemy_1 : BasseEnemy
     void ChecAttack(Collider2D colliders)
     {
         if (colliders.tag == "Player1"&&
-            colliders.transform.position.x- transform.position.x>=0&&
-            colliders.transform.position.x - transform.position.x <= 2)
+            Mathf.Abs(colliders.transform.position.x- transform.position.x)>=0&&
+             Mathf.Abs(colliders.transform.position.x - transform.position.x) <= 2)
         {
             Attack();
         }
     }
-    //void ChecWall(Collider2D other)
-    //{
-    //    if (other.tag == "Wall")
-    //    {
-    //        inRight = !inRight;
-
-    //    }
-    //}
+    
 
     void FixedUpdate()
     {      
         isStatus = 0;      
-        UIHP.fillAmount = HP / 5;
-        if (HP <= 0)
+
+     
+      
+        UIHP.fillAmount = HELS;
+        if (HELS <= 0)
         {
-            gameObject.SetActive(false);
+           
+            Destroy(gameObject);
         }
 
         ChecPleayr();
         Move();
     }
+
+    public override void ReciveDamage(float _damag)
+    {
+        HELS -= _damag;
+    }
     public void Damag(float damag)
     {
-        HP -= damag;
+        HELS -= damag;
     }
     void Attack()
     {

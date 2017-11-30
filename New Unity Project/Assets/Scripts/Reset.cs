@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class Reset : MonoBehaviour {
 
-    public ControlPle Pl;
-    public Enemy_1 Enemy;
+    public Unit Pl;
+    
 
     public void Resets()
     {
         Pl.HELS = Pl.maxHELS;
         Pl.gameObject.SetActive(true);
 
-        Enemy.HP = Enemy.maxHP;
-        Enemy.gameObject.SetActive(true);
+       
     }
     // Use this for initialization
     void Start () {
