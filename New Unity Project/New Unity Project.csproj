@@ -182,6 +182,10 @@
     <Compile Include="Assets\Scripts\Terain\Ground.cs" />
     <Compile Include="Assets\Scripts\Terain\Resp.cs" />
     <Compile Include="Assets\Scripts\Terain\Water.cs" />
+    <Compile Include="Assets\Scripts\Traps\BaseTrap.cs" />
+    <Compile Include="Assets\Scripts\Traps\LiveTrap.cs" />
+    <Compile Include="Assets\Scripts\Traps\PoisonousTrap.cs" />
+    <Compile Include="Assets\Scripts\Traps\StikchingTrap.cs" />
     <Compile Include="Assets\Scripts\Tutorial\Scripts\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Tutorial\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Unit.cs" />

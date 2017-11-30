@@ -84,7 +84,11 @@ public class MowePlayer : Unit {
         }
 
     }
-
+    private void Update()
+    {
+        if(Times())
+        time=true ;
+    }
     public void Move(float horizontal, bool isJumping, bool isRun, bool isAttact)
     {
         //if (isGrounded)
@@ -185,9 +189,30 @@ public class MowePlayer : Unit {
     }
     public override void ReciveDamage(float damag)
     {
-        HELS -= damag;
+
+        if (time)
+        {
+            HELS -= damag;
+            time = false;
+        }
+       
+    }
+    private bool time=false;
+    public float timer = 2f;
+    public float stay_timer = 2f;
+    bool Times()
+    {
+        if (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            return false;
+        }
+        else if (timer < 0)
+        {
+            timer = stay_timer;
+            return true;
+        }
+        return false;
     }
 
-
-  
 }
