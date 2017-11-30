@@ -179,6 +179,7 @@
     <Compile Include="Assets\Scripts\Terain\BackGround1.cs" />
     <Compile Include="Assets\Scripts\Terain\BackGround_element.cs" />
     <Compile Include="Assets\Scripts\Terain\BackGround_element_paralax_3.cs" />
+    <Compile Include="Assets\Scripts\Terain\BGScrol.cs" />
     <Compile Include="Assets\Scripts\Terain\Ground.cs" />
     <Compile Include="Assets\Scripts\Terain\Resp.cs" />
     <Compile Include="Assets\Scripts\Terain\Water.cs" />

@@ -84,8 +84,8 @@ public class MowePlayer : Unit {
 
     public void Move(float horizontal, bool isJumping, bool isRun, bool isAttact)
     {
-        if (isGrounded)
-        {
+        //if (isGrounded)
+        //{
             // The Speed animator parameter is set to the absolute value of the horizontal input.
             g_Animator.SetFloat("MoveX", horizontal);
 
@@ -128,7 +128,7 @@ public class MowePlayer : Unit {
             // If the input is moving the player right and the player is facing left...
             Corect_flipX(horizontal);
             Corect_flipX_sprite_weapons(horizontal);
-        }
+        //}
 
        // Debug.Log();
         // If the player should jump...
