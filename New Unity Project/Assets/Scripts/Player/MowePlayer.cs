@@ -47,17 +47,20 @@ public class MowePlayer : Unit {
     // Update is called once per frame
     void FixedUpdate()
     {
-        isGrounded = false;
+        if (freez)
+        {
+            isGrounded = false;
 
-        // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-        // This can be done using layers instead but Sample Assets will not overwrite your project settings.
-        CheckGrounded();
-        HPControl();
+            // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
+            // This can be done using layers instead but Sample Assets will not overwrite your project settings.
+            CheckGrounded();
+            HPControl();
 
-        g_Animator.SetBool("Ground", isGrounded);
+            g_Animator.SetBool("Ground", isGrounded);
 
-        //Set the vertical animation
-        g_Animator.SetFloat("vSpeed", g_Rigidbody2D.velocity.y);
+            //Set the vertical animation
+            g_Animator.SetFloat("vSpeed", g_Rigidbody2D.velocity.y);
+        }
     }
     void CheckGrounded()
     {
@@ -184,4 +187,7 @@ public class MowePlayer : Unit {
     {
         HELS -= damag;
     }
+
+
+  
 }

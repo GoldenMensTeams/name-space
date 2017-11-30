@@ -5,7 +5,7 @@ using UnityEngine;
 using CnControls;
 
 [RequireComponent(typeof(MowePlayer))]
-public class InputPlayer : MonoBehaviour {
+public class InputPlayer : Unit {
 
     private MowePlayer c_movement=null;
     private bool isJumping=false;
@@ -22,33 +22,41 @@ public class InputPlayer : MonoBehaviour {
 
     void Update()
     {
-        //If he is not jumping...
-        if (!isJumping)
+        if (freez)
         {
-            //See if button is pressed...
-            isJumping = CnInputManager.GetButtonUp("Jump");
-        }
-        if (!isRun)
-        {
-            //See if button is pressed...
-            isRun = CnInputManager.GetButton("Run");
-        }
-        if (!isAttact)
-        {
-            //See if button is pressed...
-            isAttact = CnInputManager.GetButtonUp("Attack");
+            //If he is not jumping...
+            if (!isJumping)
+            {
+                //See if button is pressed...
+                isJumping = CnInputManager.GetButtonUp("Jump");
+            }
+            if (!isRun)
+            {
+                //See if button is pressed...
+                isRun = CnInputManager.GetButton("Run");
+            }
+            if (!isAttact)
+            {
+                //See if button is pressed...
+                isAttact = CnInputManager.GetButtonUp("Attack");
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        //Get horizontal axis
-        float horizontal = CnInputManager.GetAxis("Horizontal");
-        //Call movement function in PlayerMovement
-        c_movement.Move(horizontal, isJumping, isRun, isAttact);
-        //Reset
-        isJumping = false;
-        isRun = false;
-        isAttact = false;
-}
+        if (freez)
+        {
+            //Get horizontal axis
+            float horizontal = CnInputManager.GetAxis("Horizontal");
+            //Call movement function in PlayerMovement
+            c_movement.Move(horizontal, isJumping, isRun, isAttact);
+            //Reset
+            isJumping = false;
+            isRun = false;
+            isAttact = false;
+        }
+    }
+
+   
 }

@@ -309,14 +309,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHELS: 1
   HELS: 1
-  speed: 0.08
-  HP: 5
-  maxHP: 10
+  speed: 0.03
   attack: 0.1
-  run: 0.1
+  run: 0.05
   inRight: 0
   UIHP: {fileID: 114493242144689928}
-  UIHP1: {fileID: 114208393048855902}
 --- !u!114 &114815955810879156
 MonoBehaviour:
   m_ObjectHideFlags: 1
