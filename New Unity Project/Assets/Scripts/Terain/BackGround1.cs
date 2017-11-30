@@ -76,7 +76,8 @@ public class BackGround1 : MonoBehaviour
         try
         {
             for (int i = 0; i < List_Back_Ground.Count; i++)
-                if (List_Back_Ground[i]) List_Back_Ground_Saved[i] = List_Back_Ground[i].sharedMaterial.GetTextureOffset("_MainTex");
+                if (List_Back_Ground[i])
+                    List_Back_Ground_Saved[i] = List_Back_Ground[i].sharedMaterial.GetTextureOffset("_MainTex");
         }
         catch (Exception ex)
         {
@@ -87,7 +88,8 @@ public class BackGround1 : MonoBehaviour
     void Update()
     {
         for (int i = 0; i < List_Back_Ground.Count; i++)
-            if (List_Back_Ground[i]) Move(List_Back_Ground[i], List_Back_Ground_Saved[i], List_Back_Ground_Speed[i]);
+            if (List_Back_Ground[i])
+                Move(List_Back_Ground[i], List_Back_Ground_Saved[i], List_Back_Ground_Speed[i]);
 
 
     }
@@ -97,7 +99,8 @@ public class BackGround1 : MonoBehaviour
         try
         {
             for (int i = 0; i < List_Back_Ground.Count; i++)
-                if (List_Back_Ground[i]) List_Back_Ground[i].sharedMaterial.SetTextureOffset("_MainTex", List_Back_Ground_Saved[i]);
+                if (List_Back_Ground[i])
+                    List_Back_Ground[i].sharedMaterial.SetTextureOffset("_MainTex", List_Back_Ground_Saved[i]);
         }
         catch (Exception ex)
         {

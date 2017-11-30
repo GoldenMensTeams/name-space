@@ -7,6 +7,7 @@ public abstract class Unit : MonoBehaviour {
     public float maxHELS = 1f;
     public float HELS = 1f;
     public float speed = 5f;
+    protected bool freez = true;
 
     public virtual void ReciveDamage(float _damag) { }
 
@@ -16,4 +17,15 @@ public abstract class Unit : MonoBehaviour {
         Destroy(gameObject);
     }
 
+    public virtual void FreezModOn()
+    {
+        freez = false;
+        gameObject.SetActive(freez);
+    }
+
+    public virtual void FreezModOff()
+    {
+        freez = true;
+        gameObject.SetActive(freez);
+    }
 }
