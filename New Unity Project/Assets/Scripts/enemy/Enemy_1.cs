@@ -60,14 +60,20 @@ public class Enemy_1 : BasseEnemy
         foreach (Collider2D c in colliders1)
             if (c.tag == "Ground")
             {
-                g_Rigidbody2D.velocity = new Vector2(g_Rigidbody2D.velocity.x, c.transform.position.y + 4);
+               /// c.transform.position.y + 2
+               // g_Rigidbody2D.velocity = new Vector2(g_Rigidbody2D.velocity.x, c.transform.position.y + (transform.position.y - c.transform.position.y));
 
-                gameObject.transform.position = new Vector3(gameObject.transform.position.x,
-                    c.transform.position.y + 4,
-                    gameObject.transform.position.z);
 
-                g_Animator.SetBool("Ground", true);              
-            }      
+                ///c.transform.position.y + 4,
+                //transform.position = new Vector3(transform.position.x,
+                //    c.transform.position.y + (transform.position.y - c.transform.position.y) * 2,
+                //  transform.position.z);
+
+                g_Animator.SetBool("Ground", true);
+
+              
+            }
+       
     }
     void ChecWall()
     {
@@ -75,7 +81,7 @@ public class Enemy_1 : BasseEnemy
         foreach (Collider2D c in colliders)
             if (c.tag == "Wall" || c.tag == "Ground")
             {
-
+                Debug.Log("Wall");
                 inRight = !inRight;
                 direction *= -1.0f;
             }
@@ -199,17 +205,17 @@ public class Enemy_1 : BasseEnemy
     {      
        // ChecWall(other);
 
-        if (other.tag == "Ground")
-        {
-            g_Rigidbody2D.velocity = new Vector2(g_Rigidbody2D.velocity.x, other.transform.position.y + 4);
+        //if (other.tag == "Ground")
+        //{
+        //    g_Rigidbody2D.velocity = new Vector2(g_Rigidbody2D.velocity.x, other.transform.position.y + 4);
 
-            gameObject.transform.position = new Vector3(gameObject.transform.position.x, 
-                other.transform.position.y+4, 
-                gameObject.transform.position.z);
+        //    gameObject.transform.position = new Vector3(gameObject.transform.position.x, 
+        //        other.transform.position.y+4, 
+        //        gameObject.transform.position.z);
 
-            g_Animator.SetBool("Ground", true);
-            //isJump = true;
-        }
+        //    g_Animator.SetBool("Ground", true);
+        //    //isJump = true;
+        //}
     }
    
     void OnTriggerExit2D(Collider2D other)
