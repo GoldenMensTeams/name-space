@@ -13,6 +13,7 @@ public class MowePlayer : Unit {
     public float run;
     public float jump = 5f;
 
+    private float horizontal = 0; 
     private bool RandL = true;
     private bool isGrounded = false;
 
@@ -89,15 +90,28 @@ public class MowePlayer : Unit {
         if(Times())
         time=true ;
     }
-    public void Move(float horizontal, bool isJumping, bool isRun, bool isAttact)
+    public void Move(bool isLeft, bool isRight, bool isDoubleR, bool isDoubleL, bool isJumping, bool isRun, bool isAttact)
     {
         //if (isGrounded)
         //{
-            // The Speed animator parameter is set to the absolute value of the horizontal input.
-            g_Animator.SetFloat("MoveX", horizontal);
+        // The Speed animator parameter is set to the absolute value of the horizontal input.
+      
 
-            // Move the character
-            g_Rigidbody2D.velocity = new Vector2(horizontal * speed, g_Rigidbody2D.velocity.y);
+        if (isDoubleR || isDoubleL)
+            isRun = true;
+
+        if (isRight)
+            horizontal = 1f;
+        else if (isLeft)
+            horizontal = -1f;
+        else if (Mathf.Abs(horizontal) <= 0.01)
+            horizontal = 0;
+
+
+
+            g_Animator.SetFloat("MoveX", horizontal);
+        // Move the character
+        g_Rigidbody2D.velocity = new Vector2(horizontal * speed, g_Rigidbody2D.velocity.y);
 
             if (horizontal > 0)
             {
@@ -112,8 +126,9 @@ public class MowePlayer : Unit {
                 ///////////////////--------------------------////////////////////////временно не нужно, отслеживает  поворот
                 RandL = true;
                 g_Animator.SetBool("RandL", RandL);
-                ///////////////////--------------------------////////////////////////
-            }
+            ///////////////////--------------------------////////////////////////
+            horizontal -= Time.deltaTime;
+        }
             else if (horizontal < 0)
             {
                 if (isRun)
@@ -127,11 +142,12 @@ public class MowePlayer : Unit {
                 ///////////////////--------------------------////////////////////////временно не нужно, временно не нужно, отслеживает  поворот
                 RandL = false;
                 g_Animator.SetBool("RandL", RandL);
-                ///////////////////--------------------------////////////////////////
-            }
+            ///////////////////--------------------------////////////////////////
+            horizontal += Time.deltaTime;
+        }
 
 
-
+           
             // If the input is moving the player right and the player is facing left...
             Corect_flipX(horizontal);
             Corect_flipX_sprite_weapons(horizontal);
