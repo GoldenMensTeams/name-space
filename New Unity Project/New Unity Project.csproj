@@ -162,6 +162,7 @@
     <Compile Include="Assets\Scripts\CNControls\Scripts\Controllers\Touchpad.cs" />
     <Compile Include="Assets\Scripts\CNControls\Scripts\EmptyGraphic.cs" />
     <Compile Include="Assets\Scripts\CameraScrin.cs" />
+    <Compile Include="Assets\Scripts\ListBaseEnemy.cs" />
     <Compile Include="Assets\Scripts\Menu\CloseMenu.cs" />
     <Compile Include="Assets\Scripts\Menu\GameExit.cs" />
     <Compile Include="Assets\Scripts\Menu\LoadingLevel.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="Assets\Scripts\PlayerGui\ClicButton.cs" />
     <Compile Include="Assets\Scripts\Reset.cs" />
     <Compile Include="Assets\Scripts\Spavn\Spavn_1.cs" />
+    <Compile Include="Assets\Scripts\Stop.cs" />
     <Compile Include="Assets\Scripts\Terain\BGScrol.cs" />
     <Compile Include="Assets\Scripts\Terain\BackGround.cs" />
     <Compile Include="Assets\Scripts\Terain\BackGround1.cs" />
