@@ -6,8 +6,12 @@ timeCreated: 1512329485
 =======
 guid: fcb95217cbf71e0498a70f8e290e1549
 folderAsset: yes
+<<<<<<< HEAD
+timeCreated: 1512026296
+=======
 timeCreated: 1512411286
 >>>>>>> bb60d60242222eb6d9d7531aba069659fd4030ff
+>>>>>>> e69b1c58b60eed4a85429f6ad52b5ad7898463d1
 licenseType: Free
 DefaultImporter:
   userData: 

@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scens/TestMenu.unity
+=======
+- path: Assets/Scens/Menu.unity
+>>>>>>> 11417593fb09185a45f0cf58bddecff640d8a2cd
   isLoaded: 1
   isActive: 1

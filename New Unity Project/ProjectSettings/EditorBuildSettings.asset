@@ -4,16 +4,4 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 0
-    path: Assets/Scens/mamory.unity
-    guid: cc5182d69f872b94580fc140bf22b489
-  - enabled: 1
-    path: Assets/Scens/MainScreen.unity
-    guid: 32d77a55facc7c447a3ef67e1e92cb1e
-  - enabled: 1
-    path: Assets/Scens/TestMenu.unity
-    guid: b0f62d744dc10f14cb9b61535f8b6ccb
-  - enabled: 0
-    path: Assets/Scens/Menu.unity
-    guid: bfe06fb57fd73504ead29a86cd38fc7c
+  m_Scenes: []
