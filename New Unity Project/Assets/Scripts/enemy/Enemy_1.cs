@@ -39,9 +39,27 @@ public class Enemy_1 : BasseEnemy
     {
         direction = transform.right;
         isStatus = status.patrul;
-      
 
-       
+        GameObject [] g_Object;
+        g_Object = GameObject.FindGameObjectsWithTag("Player1");
+
+        if(g_Object.Length != 0 )
+        {
+            Transform player = g_Object[0].transform;
+            Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
+      
+        g_Object = GameObject.FindGameObjectsWithTag("Enemy");
+
+        if (g_Object.Length != 0)
+        {
+            foreach (GameObject e in g_Object)
+            {
+                Transform player = e.transform;
+                Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+            }
+        }
+
     }
     private void Awake()
     {

@@ -45,8 +45,9 @@ public class BackGround : MonoBehaviour
 
         for (int i = 0; i < List_Back_Ground.Count; i++)
             List_Back_Ground[i].transform.position = new Vector3(pl.transform.position.x,
-                y + (y - pl.transform.position.y) + height_back_ground,
+               y + (y - pl.transform.position.y) + height_back_ground,
                 List_Back_Ground[i].transform.position.z);
+      //  y + (y - pl.transform.position.y) + height_back_ground,
     }
     void Move(MeshRenderer mesh, Vector2 savedOffset, float speed)
     {
