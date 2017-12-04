@@ -11,7 +11,7 @@ public class OpenMenu : MonoBehaviour {
     void Start () {
         menuOnGame = GameObject.FindGameObjectWithTag("MenuOnGame");
         playerGui = GameObject.FindGameObjectWithTag("PlayerGui");
-        menuOnGame.SetActive(false);
+        
     }
 	
     public void SetActiveMenu()
@@ -25,14 +25,16 @@ public class OpenMenu : MonoBehaviour {
 	// Update is called once per frame
     void AndroidBackButton()
     {
-        if (Application.platform == RuntimePlatform.Android)
+        if (Application.platform == RuntimePlatform.Android|| Application.platform==RuntimePlatform.WindowsPlayer||Application.platform == RuntimePlatform.WindowsEditor)
+
         {
-            if (Input.GetKey(KeyCode.Home) || Input.GetKey(KeyCode.Escape) || Input.GetKey(KeyCode.Menu))
+            Debug.Log("set platform");
+            if (Input.GetKeyDown(KeyCode.Home) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Menu))
             {
                 if (menuOnGame.active==true)
                 {
                     SetDisActiveMenu();
-                    playerGui.SetActive(true);
+                    playerGui.SetActive(true);;
                 }
                 else
                 {

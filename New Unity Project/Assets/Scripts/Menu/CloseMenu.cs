@@ -9,6 +9,7 @@ public class CloseMenu : MonoBehaviour {
     void Start () {
         playerGui = GameObject.FindGameObjectWithTag("PlayerGui");
         menuOnGame = GameObject.FindGameObjectWithTag("MenuOnGame");
+        menuOnGame.SetActive(false);
     }
 	public void SetGuiDisActive()
     {
@@ -21,9 +22,9 @@ public class CloseMenu : MonoBehaviour {
     // Update is called once per frame
     void AndroidBackButton()
     {
-        if (Application.platform == RuntimePlatform.Android)
+        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.WindowsEditor)
         {
-            if (Input.GetKey(KeyCode.Home) || Input.GetKey(KeyCode.Escape) || Input.GetKey(KeyCode.Menu))
+            if (Input.GetKeyDown(KeyCode.Home) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Menu))
             {
                 if (playerGui.active == true)
                 {
@@ -34,6 +35,7 @@ public class CloseMenu : MonoBehaviour {
                 {
                     SetGuiActive();
                     menuOnGame.SetActive(false);
+
                 }
             }
         }
