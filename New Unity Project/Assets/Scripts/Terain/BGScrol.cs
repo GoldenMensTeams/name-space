@@ -19,6 +19,7 @@ public class BGScrol : MonoBehaviour
     private float lastCameraX;
 
     private float y;
+    private float z;
     private float x;
 
     private void Start()
@@ -65,11 +66,12 @@ public class BGScrol : MonoBehaviour
     private void ScrolLeft()
     {
         y = layers[rightIndex].transform.position.y;
+        z = layers[rightIndex].transform.position.z;
 
         int lastRight = rightIndex;
         layers[rightIndex].position = Vector3.right * (layers[leftIndex].position.x - backgroungSize);
 
-        layers[rightIndex].transform.position = new Vector3(layers[rightIndex].transform.position.x, y);
+        layers[rightIndex].transform.position = new Vector3(layers[rightIndex].transform.position.x, y,z);
 
         leftIndex = rightIndex;
         rightIndex--;
@@ -80,12 +82,13 @@ public class BGScrol : MonoBehaviour
     private void ScrolRight()
     {
         y = layers[leftIndex].transform.position.y;
+        z = layers[rightIndex].transform.position.z;
 
         int lastLeft = leftIndex;
         layers[leftIndex].position = Vector3.right * (layers[rightIndex].position.x + backgroungSize);
 
 
-        layers[leftIndex].transform.position = new Vector3(layers[leftIndex].transform.position.x, y);
+        layers[leftIndex].transform.position = new Vector3(layers[leftIndex].transform.position.x, y,z);
 
         rightIndex = leftIndex;
         leftIndex++;

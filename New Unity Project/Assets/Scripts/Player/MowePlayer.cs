@@ -22,7 +22,9 @@ public class MowePlayer : Unit {
     private Rigidbody2D g_Rigidbody2D;
 
     GameObject Child;
-   
+
+    public float speedStopWall=1f;
+
     public float maxEnerjy = 1f;
     public float maxStamina = 1f;
   
@@ -106,10 +108,17 @@ public class MowePlayer : Unit {
             horizontal = -1f;
         else if (Mathf.Abs(horizontal) <= 0.01)
             horizontal = 0;
+        //if (isRight)
+        //    if(horizontal<=1)
+        //        horizontal += horizontal + Time.deltaTime;
+        //else if (isLeft)
+        //        if (horizontal >= -1)
+        //            horizontal -= horizontal - Time.deltaTime;
+        //else if (Mathf.Abs(horizontal) <= 0.01)
+        //    horizontal = 0;
 
 
-
-            g_Animator.SetFloat("MoveX", horizontal);
+        g_Animator.SetFloat("MoveX", horizontal);
         // Move the character
         g_Rigidbody2D.velocity = new Vector2(horizontal * speed, g_Rigidbody2D.velocity.y);
 
