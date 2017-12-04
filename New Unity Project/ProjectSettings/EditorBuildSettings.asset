@@ -14,3 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scens/TestMenu.unity
     guid: b0f62d744dc10f14cb9b61535f8b6ccb
+<<<<<<< HEAD
+=======
+  - enabled: 0
+    path: Assets/Scens/Menu.unity
+    guid: bfe06fb57fd73504ead29a86cd38fc7c
+>>>>>>> e69b1c58b60eed4a85429f6ad52b5ad7898463d1
