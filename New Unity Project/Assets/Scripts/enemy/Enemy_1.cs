@@ -72,7 +72,7 @@ public class Enemy_1 : BasseEnemy
     }
     void CheckGround()
     {
-        Collider2D[] colliders1 = Physics2D.OverlapCircleAll(transform.position + transform.up * -1, 0.2F);
+        Collider2D[] colliders1 = Physics2D.OverlapCircleAll(transform.position + transform.up * -1, 1F);
         g_Animator.SetBool("Ground", false);
 
         foreach (Collider2D c in colliders1)
@@ -80,7 +80,6 @@ public class Enemy_1 : BasseEnemy
             {
                /// c.transform.position.y + 2
                // g_Rigidbody2D.velocity = new Vector2(g_Rigidbody2D.velocity.x, c.transform.position.y + (transform.position.y - c.transform.position.y));
-
 
                 ///c.transform.position.y + 4,
                 //transform.position = new Vector3(transform.position.x,
@@ -93,13 +92,70 @@ public class Enemy_1 : BasseEnemy
             }
        
     }
+    void CheckDownGround()
+    {
+      //  .OverlapBoxAll(transform.position + transform.right * 3f * direction.x, new Vector2(2.5f, 7), 90);
+        Collider2D[] DownColliders = Physics2D.OverlapBoxAll((transform.position - transform.up*5) + transform.right*2* direction.x, new Vector2(3f, 20),0);
+        Collider2D[] JumpColliders = Physics2D.OverlapBoxAll((transform.position + transform.up * 13) + transform.right * 2 * direction.x, new Vector2(3f, 20), 0);
+        Collider2D[] isJumpColliders = Physics2D.OverlapBoxAll((transform.position + transform.up * 10), new Vector2(3f, 20), 0);
+        foreach (Collider2D c in DownColliders)
+            if (c.tag == "Ground")
+            {
+               
+
+                return;
+            }
+
+        //foreach (Collider2D c in JumpColliders)
+        //    if (c.tag == "Ground")
+        //    {
+
+
+        //        return;
+        //    }
+
+        inRight = !inRight;
+        direction *= -1.0f;
+    }
+
+    ////  .OverlapBoxAll(transform.position + transform.right* 3f * direction.x, new Vector2(2.5f, 7), 90);
+    //    Collider2D[] colliders1 = Physics2D.OverlapBoxAll((transform.position - transform.up * 5), new Vector2(3f, 20), 0);
+    //Collider2D[] colliders2 = Physics2D.OverlapBoxAll((transform.position + transform.up * 13) + transform.right * 2 * direction.x, new Vector2(3f, 20), 0);
+    //Collider2D[] colliders3 = Physics2D.OverlapBoxAll((transform.position + transform.up * 10), new Vector2(3f, 20), 0);
+    //    foreach (Collider2D c in colliders1)          
+    //        if (c.tag == "Ground")
+    //        {
+
+    //            foreach (Collider2D c2 in colliders2)
+    //                if (c2.tag == "Ground")
+    //                {
+    //                        //foreach (Collider2D c3 in colliders3)
+    //                        //    if (c3.tag == "Ground")
+    //                        //        return;
+
+    //                    if ((transform.position.x )<= c2.transform.position.x-10)
+    //                    {
+    //                        Debug.Log("KKK" + (transform.position.x  )+ "  KK " + (c2.transform.position.x - 10));
+                           
+    //                       // if (Random.RandomRange(1, 5) == 3)
+    //                      //  {
+    //                      //  Debug.Log("KKK");
+    //                        transform.position = Vector3.MoveTowards(transform.position, c2.transform.position - (c2.transform.right*10) * direction.x + c2.transform.up*2, speedJump);
+    //                        return;
+    //                     //   }
+
+    //                    }
+    //                }
+                       
+    //        }       
+    //    inRight = !inRight;
+    //    direction *= -1.0f;
     void ChecWall()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position + transform.right * direction.x, 0.2F);
         foreach (Collider2D c in colliders)
             if (c.tag == "Wall" || c.tag == "Ground")
-            {
-                Debug.Log("Wall");
+            {            
                 inRight = !inRight;
                 direction *= -1.0f;
             }
@@ -114,13 +170,14 @@ public class Enemy_1 : BasseEnemy
     // Update is called once per frame
     void Move()
     {
+        CheckDownGround();
         ChecWall();
         CheckGround();
 
         g_SpriteRenderer.flipX = inRight;
         Corect_flipX_sprite_weapons();
 
-
+        if (g_Animator.GetBool("Ground"))
         switch (isStatus)
         {
             case status.agresiv:
@@ -238,11 +295,11 @@ public class Enemy_1 : BasseEnemy
    
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Ground")
-        {
-            g_Animator.SetBool("Ground", false);
-            // isJump = false;
-        }
+        //if (other.tag == "Ground")
+        //{
+        //    g_Animator.SetBool("Ground", false);
+        //    // isJump = false;
+        //}
 
     }
 }

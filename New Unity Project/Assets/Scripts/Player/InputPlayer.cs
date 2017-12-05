@@ -21,12 +21,12 @@ public class InputPlayer : Unit {
     private bool isDoubleCR = false;
     private bool isDoubleCL = false;
 
-    long time;
+   
 
    float currentTime = 0;  
    float lastClickTime = 0;
    float clickTime = 0.2F;
-
+  
   
    ///void KeyUp(ref bool clic)   1
     //{

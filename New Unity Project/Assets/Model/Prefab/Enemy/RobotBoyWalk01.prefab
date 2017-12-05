@@ -312,6 +312,7 @@ MonoBehaviour:
   speed: 0.03
   attack: 0.1
   run: 0.05
+  speedJump: 0.27
   inRight: 0
   UIHP: {fileID: 114493242144689928}
 --- !u!114 &114815955810879156

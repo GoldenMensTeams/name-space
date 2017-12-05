@@ -398,6 +398,11 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 0.21089
       objectReference: {fileID: 0}
+    - target: {fileID: 114707375048548122, guid: f84109ac2aaac804ea929487c575ac90,
+        type: 2}
+      propertyPath: maxCount
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f84109ac2aaac804ea929487c575ac90, type: 2}
   m_IsPrefabParent: 0
@@ -3007,8 +3012,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -286.99942, y: 138.99998}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -200.99998, y: 134}
+  m_SizeDelta: {x: 271.6, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &559151051
 MonoBehaviour:
@@ -3029,7 +3034,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: fa0c219867d3b7b48bdefe7bc0498b20, type: 3}
+  m_Sprite: {fileID: 21300002, guid: e6ad38333fd5d2a42916219fdb97d038, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6296,10 +6301,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pl: {fileID: 621735098}
-  ProzY: 1
   ProzX: 0
   height_back_ground: 0
   count_save: 2
+  ProzY:
+  - 0.22
+  - 0.22
+  ProzSize:
+  - 0.82
+  - 0.95
   List_Back_Ground:
   - {fileID: 1306197508}
   - {fileID: 421500156}
@@ -6318,9 +6328,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pl: {fileID: 621735098}
-  ProzY: 0.9
+  ProzY: 0.22
   ProzX: 5
-  height_back_ground: 9
+  height_back_ground: 0
   count_save: 1
   List_Back_Ground:
   - {fileID: 946933851}
@@ -6704,15 +6714,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4362103331531618, guid: f1d529dae3c4bda459941efc9130b8ff, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 133.20001
+      value: 132.80002
       objectReference: {fileID: 0}
     - target: {fileID: 4362103331531618, guid: f1d529dae3c4bda459941efc9130b8ff, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 42.9
+      value: 41.7
       objectReference: {fileID: 0}
     - target: {fileID: 4362103331531618, guid: f1d529dae3c4bda459941efc9130b8ff, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0.8
+      value: 0.80000013
       objectReference: {fileID: 0}
     - target: {fileID: 4362103331531618, guid: f1d529dae3c4bda459941efc9130b8ff, type: 2}
       propertyPath: m_LocalRotation.x
@@ -6724,23 +6734,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4362103331531618, guid: f1d529dae3c4bda459941efc9130b8ff, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.12697475
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4362103331531618, guid: f1d529dae3c4bda459941efc9130b8ff, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.991906
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4362103331531618, guid: f1d529dae3c4bda459941efc9130b8ff, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4362103331531618, guid: f1d529dae3c4bda459941efc9130b8ff, type: 2}
       propertyPath: m_LocalScale.x
-      value: 4.5098267
+      value: 4.509827
       objectReference: {fileID: 0}
     - target: {fileID: 4362103331531618, guid: f1d529dae3c4bda459941efc9130b8ff, type: 2}
       propertyPath: m_LocalScale.y
-      value: 4.5098267
+      value: 4.509827
       objectReference: {fileID: 0}
     - target: {fileID: 4362103331531618, guid: f1d529dae3c4bda459941efc9130b8ff, type: 2}
       propertyPath: m_LocalScale.z
@@ -6750,6 +6760,10 @@ Prefab:
       propertyPath: m_Name
       value: "\u041F\u043D\u0433_\u0411\u043B\u043E\u043A\u0430\u0417\u0435\u043C\u043B\u04383
         (1)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362103331531618, guid: f1d529dae3c4bda459941efc9130b8ff, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f1d529dae3c4bda459941efc9130b8ff, type: 2}
@@ -7072,8 +7086,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -286.99997, y: 139.00008}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -209, y: 139.00008}
+  m_SizeDelta: {x: 271.6, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1305277170
 MonoBehaviour:
@@ -7094,11 +7108,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: fa0c219867d3b7b48bdefe7bc0498b20, type: 3}
+  m_Sprite: {fileID: 21300002, guid: e6ad38333fd5d2a42916219fdb97d038, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 1
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -7133,7 +7147,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1306197506}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.58, y: -1.23, z: 0.82}
+  m_LocalPosition: {x: -0.58, y: 0.01, z: 0.82}
   m_LocalScale: {x: 14.854925, y: 11.769613, z: 11.769613}
   m_Children: []
   m_Father: {fileID: 1135881375}
@@ -7744,7 +7758,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4940007563991100, guid: d327eac3b1120d44ba13105301bb163d, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4940007563991100, guid: d327eac3b1120d44ba13105301bb163d, type: 2}
       propertyPath: m_LocalScale.x
@@ -8572,7 +8586,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1460695092
 Transform:
   m_ObjectHideFlags: 0
@@ -10496,8 +10510,8 @@ Transform:
   m_Children:
   - {fileID: 1648286741}
   - {fileID: 1754181736}
-  - {fileID: 1363889759}
   - {fileID: 985615554}
+  - {fileID: 1363889759}
   - {fileID: 1012835211}
   - {fileID: 638624760}
   - {fileID: 1453825364}

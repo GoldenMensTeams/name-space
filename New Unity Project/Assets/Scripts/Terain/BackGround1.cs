@@ -13,14 +13,15 @@ public class BackGround1 : MonoBehaviour
     private float x;
     private float y;
 
-    public float ProzY;
+ 
     public float ProzX;
 
     public float height_back_ground;
     public int count_save;
 
 
-
+    public List<float> ProzY;
+    public List<float> ProzSize;
     public List<MeshRenderer> List_Back_Ground;
     public List<float> List_Back_Ground_Speed;
     private List<Vector2> List_Back_Ground_Saved;
@@ -41,6 +42,8 @@ public class BackGround1 : MonoBehaviour
         {
             x_list_stay.Add(List_Back_Ground[i].transform.position.x);
           
+
+
             List_Back_Ground_Saved.Add(new Vector2());
         }
           
@@ -54,7 +57,8 @@ public class BackGround1 : MonoBehaviour
     void MovePoz()
     {
         for (int i = 0; i < List_Back_Ground.Count; i++)
-            List_Back_Ground[i].transform.position = new Vector3(pl.transform.position.x - x + x_list_stay[i], List_Back_Ground[i].transform.position.y, List_Back_Ground[i].transform.position.z);
+            List_Back_Ground[i].transform.position = new Vector3(pl.transform.position.x - x + x_list_stay[i], y / ProzSize[i] + (y - pl.transform.position.y) * ProzY[i], List_Back_Ground[i].transform.position.z);
+        //(pl.transform.position.y - y / 2) + (y - pl.transform.position.y) * ProzY + height_back_ground
     }
     void Move(MeshRenderer mesh, Vector2 savedOffset, float speed)
     {

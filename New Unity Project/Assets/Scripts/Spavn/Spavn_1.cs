@@ -10,6 +10,7 @@ public class Spavn_1 : MonoBehaviour {
     public GameObject prefab;
     public float timer=5f;
     public float stay_timer = 5f;
+    public int maxCount;
     // Use this for initialization
     void Start () {
         enemys = new List<GameObject>();
@@ -33,7 +34,7 @@ public class Spavn_1 : MonoBehaviour {
 	void Update () {
 
       
-        if (enemys.Count < 5)
+        if (enemys.Count < maxCount)
         {
                
                 if(Times())

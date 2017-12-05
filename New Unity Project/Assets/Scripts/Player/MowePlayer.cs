@@ -22,7 +22,7 @@ public class MowePlayer : Unit {
     private Rigidbody2D g_Rigidbody2D;
 
     GameObject Child;
-
+    float times = 0.2f;
     public float speedStopWall=1f;
 
     public float maxEnerjy = 1f;
@@ -107,15 +107,11 @@ public class MowePlayer : Unit {
         else if (isLeft)
             horizontal = -1f;
         else if (Mathf.Abs(horizontal) <= 0.01)
-            horizontal = 0;
-        //if (isRight)
-        //    if(horizontal<=1)
-        //        horizontal += horizontal + Time.deltaTime;
-        //else if (isLeft)
-        //        if (horizontal >= -1)
-        //            horizontal -= horizontal - Time.deltaTime;
-        //else if (Mathf.Abs(horizontal) <= 0.01)
-        //    horizontal = 0;
+        {
+            horizontal  = 0;
+            times = 0.2f;
+        }
+          
 
 
         g_Animator.SetFloat("MoveX", horizontal);
@@ -124,6 +120,12 @@ public class MowePlayer : Unit {
 
             if (horizontal > 0)
             {
+
+            if (times > 0)
+                times -= Time.deltaTime;
+            else 
+                times = 0;
+
                 if (isRun)
                 {
                     speed = run;
@@ -136,11 +138,16 @@ public class MowePlayer : Unit {
                 RandL = true;
                 g_Animator.SetBool("RandL", RandL);
             ///////////////////--------------------------////////////////////////
-            horizontal -= Time.deltaTime;
-        }
+            horizontal -= Time.deltaTime + times;
+            }
             else if (horizontal < 0)
             {
-                if (isRun)
+                if (times > 0)
+                    times -= Time.deltaTime;
+                else 
+                    times = 0;
+
+            if (isRun)
                 {
                     speed = run;
                 }
@@ -152,8 +159,8 @@ public class MowePlayer : Unit {
                 RandL = false;
                 g_Animator.SetBool("RandL", RandL);
             ///////////////////--------------------------////////////////////////
-            horizontal += Time.deltaTime;
-        }
+            horizontal += Time.deltaTime + times;
+            }
 
 
            
