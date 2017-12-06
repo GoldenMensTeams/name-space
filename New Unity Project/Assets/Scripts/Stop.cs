@@ -2,26 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stop : MonoBehaviour {
+public class Stop  {
 
-    private bool paused = false;
 
-    public void Pause()
+    static public void Pause(bool ispause)
     {
-        if (!paused)
+        if (ispause)
         {
             Time.timeScale = 0;
-            paused = true;
-           
+            Debug.Log("1");
         }
         else
         {
+            Debug.Log("2");
             Time.timeScale = 1;
-            paused = false;
         }
     }
-    // Update is called once per frame
-    void Update () {
-		
-	}
+    
 }
