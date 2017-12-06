@@ -6,10 +6,15 @@ public class CloseMenu : MonoBehaviour {
     GameObject playerGui;
     GameObject menuOnGame;
     // Use this for initialization
-    void Start () {
+    private void Awake()
+    {
         playerGui = GameObject.FindGameObjectWithTag("PlayerGui");
         menuOnGame = GameObject.FindGameObjectWithTag("MenuOnGame");
         menuOnGame.SetActive(false);
+    }
+    void Start () {
+       
+        
     }
 	public void SetGuiDisActive()
     {
@@ -30,12 +35,13 @@ public class CloseMenu : MonoBehaviour {
                 {
                     SetGuiDisActive();
                     menuOnGame.SetActive(true);
+                    Stop.Pause(true);
                 }
                 else
                 {
                     SetGuiActive();
                     menuOnGame.SetActive(false);
-
+                    Stop.Pause(false);
                 }
             }
         }

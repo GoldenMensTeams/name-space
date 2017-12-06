@@ -8,19 +8,25 @@ public class OpenMenu : MonoBehaviour {
     GameObject playerGui;
 
     // Use this for initialization
-    void Start () {
+    private void Awake()
+    {
         menuOnGame = GameObject.FindGameObjectWithTag("MenuOnGame");
         playerGui = GameObject.FindGameObjectWithTag("PlayerGui");
+       
+    }
+    void Start () {
         
     }
 	
     public void SetActiveMenu()
     {
         menuOnGame.SetActive(true);
+        Stop.Pause(true);
     }
     public void SetDisActiveMenu()
     {
         menuOnGame.SetActive(false);
+        Stop.Pause(false);
     }
 	// Update is called once per frame
     void AndroidBackButton()
@@ -34,18 +40,23 @@ public class OpenMenu : MonoBehaviour {
                 if (menuOnGame.active==true)
                 {
                     SetDisActiveMenu();
-                    playerGui.SetActive(true);;
+                    playerGui.SetActive(true);
+                    Stop.Pause(false);
                 }
                 else
                 {
                     SetActiveMenu();
                     playerGui.SetActive(false);
+                    Stop.Pause(true);
                 }
             }
         }
     }
-	void Update ()
+    void Update()
     {
         AndroidBackButton();
+      
+            Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+        Debug.Log("Pos coord: ("+mousePos.x+","+mousePos.y+")");
     }
 }
