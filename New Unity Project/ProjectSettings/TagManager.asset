@@ -17,6 +17,8 @@ TagManager:
   - AcceptCanvas
   - MainScreen
   - MouthButton
+  - Gra
+  - Player2
   layers:
   - Default
   - TransparentFX

@@ -11,14 +11,11 @@ enum status
     stayAgresiv = 3
 } 
 public class Enemy_1 : BasseEnemy
-{
-   
+{  
     status isStatus;
  
     public float attack = 0.1f;
-
   
-   
     public float run = 10f;
 
     public bool inRight = false;

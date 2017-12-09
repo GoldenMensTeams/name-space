@@ -21,23 +21,12 @@ public class InputPlayer : Unit {
     private bool isDoubleCR = false;
     private bool isDoubleCL = false;
 
-   
+    private bool Activ = true;
 
-   float currentTime = 0;  
+    float currentTime = 0;  
    float lastClickTime = 0;
    float clickTime = 0.2F;
   
-  
-   ///void KeyUp(ref bool clic)   1
-    //{
-    //    time = Stopwatch.GetTimestamp();
-    //    clic = false;
-    //}
-    //void KeyDown(ref bool clic)
-    //{
-    //    if (time - Stopwatch.GetTimestamp() <= 100)
-    //        clic = true;
-    //}
 
     void Awake()
     {
@@ -49,8 +38,7 @@ public class InputPlayer : Unit {
 
     void Update()
     {
-        if (freez)
-        {
+      
             //If he is not jumping...
             if (!isJumping)
             {
@@ -164,12 +152,12 @@ public class InputPlayer : Unit {
             //}
 
 
-        }
+        
     }
 
     private void FixedUpdate()
     {
-        if (freez)
+        
         {
             //Get horizontal axis
             //float horizontal=0;// = CnInputManager.GetAxis("Horizontal");         
@@ -190,5 +178,15 @@ public class InputPlayer : Unit {
         }
     }
 
-   
+  
+    public virtual void FreezModOn()
+    {
+        Activ = false;
+    }
+
+    public virtual void FreezModOff()
+    {
+        Activ = true;
+    }
+
 }

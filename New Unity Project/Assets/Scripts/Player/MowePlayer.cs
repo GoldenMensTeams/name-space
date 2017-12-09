@@ -50,7 +50,7 @@ public class MowePlayer : Unit {
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (freez)
+       
         {
             isGrounded = false;
 
