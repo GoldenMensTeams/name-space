@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MoweHedgehog : Unit {
+public class MoweHedgehog : Unit
+{
 
     public Image UIHP;
 
@@ -13,7 +14,9 @@ public class MoweHedgehog : Unit {
     public float run;
     public float jump = 5f;
 
-    private float horizontal = 0; 
+  
+
+    private float horizontal = 0;
     private bool RandL = true;
     private bool isGrounded = false;
 
@@ -21,10 +24,11 @@ public class MoweHedgehog : Unit {
     private SpriteRenderer sprite;
     private Rigidbody2D g_Rigidbody2D;
     private Vector3 direction;
+    GameObject[] g_Object;
 
     GameObject Child;
     float times = 0.2f;
-    public float speedStopWall=1f;
+    public float speedStopWall = 1f;
 
     private void Awake()
     {
@@ -38,9 +42,19 @@ public class MoweHedgehog : Unit {
     }
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         memor_speed = speed;
         direction = transform.right;
+
+      
+        g_Object = GameObject.FindGameObjectsWithTag("Player1");
+
+        if (g_Object.Length != 0)
+        {
+            Transform player = g_Object[0].transform;
+            Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
     }
     private void Update()
     {
@@ -49,18 +63,18 @@ public class MoweHedgehog : Unit {
     }
     // Update is called once per frame
     void FixedUpdate()
-    {     
-            isGrounded = false;
+    {
+        isGrounded = false;
 
-            // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-            // This can be done using layers instead but Sample Assets will not overwrite your project settings.
-            CheckGrounded();
-            HPControl();
+        // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
+        // This can be done using layers instead but Sample Assets will not overwrite your project settings.
+        CheckGrounded();
+        HPControl();
 
-            g_Animator.SetBool("Ground", isGrounded);
+        g_Animator.SetBool("Ground", isGrounded);
 
-            //Set the vertical animation
-            g_Animator.SetFloat("vSpeed", g_Rigidbody2D.velocity.y);
+        //Set the vertical animation
+        g_Animator.SetFloat("vSpeed", g_Rigidbody2D.velocity.y);
     }
     ////////////////////////////////////////////////////////////
     void CheckGrounded()
@@ -85,15 +99,10 @@ public class MoweHedgehog : Unit {
         }
 
     }
- 
+
     ////////////////////////////////////////////////////////////
     public void Move(bool isLeft, bool isRight, bool isDoubleR, bool isDoubleL, bool isJumping, bool isRun, bool isAttact)
-    {
-        //if (isGrounded)
-        //{
-        // The Speed animator parameter is set to the absolute value of the horizontal input.
-      
-
+    {      
         if (isDoubleR || isDoubleL)
             isRun = true;
 
@@ -103,79 +112,71 @@ public class MoweHedgehog : Unit {
             horizontal = -1f;
         else if (Mathf.Abs(horizontal) <= 0.01)
         {
-            horizontal  = 0;
+            horizontal = 0;
             times = 0.2f;
         }
-          
-
 
         g_Animator.SetFloat("MoveX", horizontal);
         // Move the character
         g_Rigidbody2D.velocity = new Vector2(horizontal * speed, g_Rigidbody2D.velocity.y);
 
-            if (horizontal > 0)
-            {
+        if (horizontal > 0)
+        {
 
             if (times > 0)
                 times -= Time.deltaTime;
-            else 
+            else
                 times = 0;
 
-                if (isRun)
-                {
-                    speed = run;
-                }
-                else
-                {
-                    speed = memor_speed;
-                }
-                ///////////////////--------------------------////////////////////////временно не нужно, отслеживает  поворот
-                RandL = true;
-                g_Animator.SetBool("RandL", RandL);
+            if (isRun)
+            {
+                speed = run;
+            }
+            else
+            {
+                speed = memor_speed;
+            }
+            ///////////////////--------------------------////////////////////////временно не нужно, отслеживает  поворот
+            RandL = true;
+            g_Animator.SetBool("RandL", RandL);
             ///////////////////--------------------------////////////////////////
             horizontal -= Time.deltaTime + times;
-            }
-            else if (horizontal < 0)
-            {
-                if (times > 0)
-                    times -= Time.deltaTime;
-                else 
-                    times = 0;
+        }
+        else if (horizontal < 0)
+        {
+            if (times > 0)
+                times -= Time.deltaTime;
+            else
+                times = 0;
 
             if (isRun)
-                {
-                    speed = run;
-                }
-                else
-                {
-                    speed = memor_speed;
-                }
-                ///////////////////--------------------------////////////////////////временно не нужно, временно не нужно, отслеживает  поворот
-                RandL = false;
-                g_Animator.SetBool("RandL", RandL);
+            {
+                speed = run;
+            }
+            else
+            {
+                speed = memor_speed;
+            }
+            ///////////////////--------------------------////////////////////////временно не нужно, временно не нужно, отслеживает  поворот
+            RandL = false;
+            g_Animator.SetBool("RandL", RandL);
             ///////////////////--------------------------////////////////////////
             horizontal += Time.deltaTime + times;
-            }
+        }
+    
+        Corect_flipX(horizontal);
+        Corect_flipX_sprite_weapons(horizontal);
 
-
-           
-            // If the input is moving the player right and the player is facing left...
-            Corect_flipX(horizontal);
-            Corect_flipX_sprite_weapons(horizontal);
-        //}
-
-       // Debug.Log();
-        // If the player should jump...
         if (isGrounded && isJumping)
         {
-            // Add a vertical force to the player.
+      
             isJumping = false;
-            g_Animator.SetBool("Ground", false);           
+            g_Animator.SetBool("Ground", false);
             g_Rigidbody2D.AddForce(new Vector2(0f, jump), ForceMode2D.Impulse);
         }
         if (isGrounded && isAttact && g_Animator.GetBool("Ground"))
         {
-            // Add a vertical force to the player.
+            
             isAttact = false;
             Attack();
         }
@@ -183,18 +184,22 @@ public class MoweHedgehog : Unit {
     public void Follow()
     {
         Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position + transform.right * 3f * direction.x, new Vector2(2.5f, 7), 90);
-
+        bool isP = true;
         foreach (Collider2D c in colliders)
         {
+
             if (c.tag == "Player1" &&
-               Mathf.Abs(c.transform.position.x - transform.position.x) >= 2)
+               Mathf.Abs(c.transform.position.x - transform.position.x) > 3)
             {
-              //  transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, speed + Time.deltaTime);
+                //  transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, speed + Time.deltaTime);
 
 
-                horizontal = 1f;
+                if (RandL)
+                    horizontal = 1f;
+                else if (!RandL)
+                    horizontal = -1f;
 
-                RandL = true;
+               
                 g_Animator.SetBool("RandL", RandL);
 
 
@@ -202,15 +207,56 @@ public class MoweHedgehog : Unit {
 
                 g_Animator.SetFloat("MoveX", speed * direction.x);
                 g_Animator.SetBool("Run", true);
+                isP = false;
+
             }
-            else if (c.tag == "Player1" &&
-                    Mathf.Abs(c.transform.position.x - transform.position.x) < 2 &&
-                    Mathf.Abs(c.transform.position.x - transform.position.x) >= 0)
-            {
-                g_Animator.SetFloat("MoveX", 0);
-                g_Animator.SetBool("Run", false);
-            }
+            //else if (c.tag == "Player1" &&
+            //        Mathf.Abs(c.transform.position.x - transform.position.x) < 2 &&
+            //        Mathf.Abs(c.transform.position.x - transform.position.x) >= 0)
+            //{
+
+            //    horizontal -= Time.deltaTime;
+
+            //    g_Rigidbody2D.velocity = new Vector2(horizontal * speed, g_Rigidbody2D.velocity.y);
+
+            //    g_Animator.SetFloat("MoveX", horizontal);
+            //    g_Animator.SetBool("Run", false);
+            //    isP = false;
+
+            //}
+
         }
+        
+        if (isP)
+        {
+            
+            
+          
+             if (Mathf.Abs(horizontal) <= 0.01)
+            {
+                horizontal = 0;
+                times = 0.2f;
+            }
+
+            if (times > 0)
+                times -= Time.deltaTime;
+            else
+                times = 0;
+
+            
+            g_Rigidbody2D.velocity = new Vector2(horizontal * speed, g_Rigidbody2D.velocity.y);
+            g_Animator.SetFloat("MoveX", horizontal * speed );
+
+            if(horizontal>0)
+                horizontal -= Time.deltaTime + times;
+            else if(horizontal < 0)
+                horizontal += Time.deltaTime + times;
+        }
+
+
+        Corect_flipX(horizontal);
+        Corect_flipX_sprite_weapons(horizontal);
+        CheckPleyar();
     }
     ////////////////////////////////////////////////////////////
     void HPControl()
@@ -227,6 +273,26 @@ public class MoweHedgehog : Unit {
         }
     }
     ////////////////////////////////////////////////////////////
+    void CheckPleyar()
+    {
+        if (g_Object.Length != 0)
+        {
+            Transform player = g_Object[0].transform;
+            if (player.position.x<transform.position.x)
+            {
+                direction.x = -1f;
+                RandL = false;
+               
+            }
+            else if (player.position.x > transform.position.x)
+            {
+                direction.x = 1f;
+                RandL = true;
+              
+            }
+         }
+    }
+    ////////////////////////////////////////////////////////////
     public override void ReciveDamage(float damag)
     {
 
@@ -239,10 +305,10 @@ public class MoweHedgehog : Unit {
     }
     void Attack()
     {
-       
-            gameObject.GetComponent<Animator>().SetTrigger("attack");
 
-       
+        gameObject.GetComponent<Animator>().SetTrigger("attack");
+
+
     }
     ////////////////////////////////////////////////////////////
     void Corect_flipX_sprite_weapons(float horizontal)
@@ -258,9 +324,9 @@ public class MoweHedgehog : Unit {
             sprite.flipX = !RandL;
         else
             sprite.flipX = position.x < 0;
-    }  
+    }
     ////////////////////////////////////////////////////////////
-    private bool time=false;
+    private bool time = false;
     public float timer = 2f;
     public float stay_timer = 2f;
     bool Times()

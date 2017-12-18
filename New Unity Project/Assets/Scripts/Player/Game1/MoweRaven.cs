@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MoweRaven : Unit {
+public class MoweRaven : Unit
+{
     public Image UIHP;
 
     Vector3 position;
@@ -12,18 +13,21 @@ public class MoweRaven : Unit {
     public float run;
     public float jump = 5f;
 
-    private float horizontal = 0; 
+    private float horizontal = 0;
     private bool RandL = true;
     private bool isGrounded = false;
+
+  
 
     private Animator g_Animator;
     private SpriteRenderer sprite;
     private Rigidbody2D g_Rigidbody2D;
     private Vector3 direction;
+    GameObject[] g_Object;
 
     GameObject Child;
     float times = 0.2f;
-    public float speedStopWall=1f;
+    public float speedStopWall = 1f;
 
     private void Awake()
     {
@@ -35,13 +39,23 @@ public class MoweRaven : Unit {
         g_Animator = GetComponent<Animator>();
 
     }
-    void Start () {
+    void Start()
+    {
         memor_speed = speed;
         direction = transform.right;
+
+      
+        g_Object = GameObject.FindGameObjectsWithTag("Player2");
+
+        if (g_Object.Length != 0)
+        {
+            Transform player = g_Object[0].transform;
+            Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
     }
     void FixedUpdate()
     {
-       // if (Activ)
+        // if (Activ)
         {
             isGrounded = false;
 
@@ -87,41 +101,78 @@ public class MoweRaven : Unit {
     ////////////////////////////////////////////////////////////
     public void Follow()
     {
-       
+
 
         Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position + transform.right * 3f * direction.x, new Vector2(2.5f, 7), 90);
-
+        bool isP = true;
         foreach (Collider2D c in colliders)
         {
-            if (c.tag == "Player2" &&
-               Mathf.Abs(c.transform.position.x - transform.position.x) >= 2)
-            {
-             
-                    horizontal = 1f;
 
-                RandL = true;
+            if (c.tag == "Player2" &&
+               Mathf.Abs(c.transform.position.x - transform.position.x) > 3)
+            {
+
+                if (RandL)
+                    horizontal = 1f;
+                else if (!RandL)
+                    horizontal = -1f;
+
+               
                 g_Animator.SetBool("RandL", RandL);
 
-                g_Rigidbody2D.velocity = new Vector2(horizontal * speed, g_Rigidbody2D.velocity.y);
-                // transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, speed + Time.deltaTime);
-                g_Animator.SetFloat("MoveX", speed * direction.x);
-               // g_Animator.SetBool("Run", true);
+                g_Rigidbody2D.velocity = new Vector2(horizontal * speed , g_Rigidbody2D.velocity.y);
+
+                g_Animator.SetFloat("MoveX", speed);
+                isP = false;
             }
-            else if (c.tag == "Player2" &&
-                    Mathf.Abs(c.transform.position.x - transform.position.x) < 2 &&
-                    Mathf.Abs(c.transform.position.x - transform.position.x) >= 0)
-                 {
-                    g_Animator.SetFloat("MoveX", 0);
-                //    g_Animator.SetBool("Run", false);
-                 }
+            //else if (c.tag == "Player2" &&
+            //        Mathf.Abs(c.transform.position.x - transform.position.x) < 2 &&
+            //        Mathf.Abs(c.transform.position.x - transform.position.x) >= 0)
+            //{
+            //    horizontal -= Time.deltaTime;
+            //    g_Rigidbody2D.velocity = new Vector2(horizontal * speed, g_Rigidbody2D.velocity.y);
+            //    g_Animator.SetFloat("MoveX", horizontal);
+            //    isP = false;
+            //}
+
         }
+       
+        if (isP)
+        {
+           
+
+         
+             if (Mathf.Abs(horizontal) <= 0.01)
+            {
+                horizontal = 0;
+                times = 0.2f;
+            }
+
+            if (times > 0)
+                times -= Time.deltaTime;
+            else
+                times = 0;
+
+           
+            g_Rigidbody2D.velocity = new Vector2(horizontal * speed, g_Rigidbody2D.velocity.y);
+            g_Animator.SetFloat("MoveX", horizontal * speed);
+
+            if (horizontal > 0)
+                horizontal -= Time.deltaTime + times;
+            else if (horizontal < 0)
+                horizontal += Time.deltaTime + times;
+        }
+
+        Corect_flipX(horizontal);
+        Corect_flipX_sprite_weapons(horizontal);
+        CheckPleyar();
     }
     public void Move(bool isLeft, bool isRight, bool isDoubleR, bool isDoubleL, bool isJumping, bool isRun, bool isAttact)
     {
         //if (isGrounded)
         //{
         // The Speed animator parameter is set to the absolute value of the horizontal input.
-      
+
 
         if (isDoubleR || isDoubleL)
             isRun = true;
@@ -132,65 +183,65 @@ public class MoweRaven : Unit {
             horizontal = -1f;
         else if (Mathf.Abs(horizontal) <= 0.01)
         {
-            horizontal  = 0;
+            horizontal = 0;
             times = 0.2f;
         }
-          
+
         g_Animator.SetFloat("MoveX", horizontal);
 
         g_Rigidbody2D.velocity = new Vector2(horizontal * speed, g_Rigidbody2D.velocity.y);
 
-            if (horizontal > 0)
-            {
+        if (horizontal > 0)
+        {
 
             if (times > 0)
                 times -= Time.deltaTime;
-            else 
+            else
                 times = 0;
 
-                if (isRun)
-                {
-                    speed = run;
-                }
-                else
-                {
-                    speed = memor_speed;
-                }
-               
-                RandL = true;
-                g_Animator.SetBool("RandL", RandL);
-          
-            horizontal -= Time.deltaTime + times;
-            }
-            else if (horizontal < 0)
+            if (isRun)
             {
-                if (times > 0)
-                    times -= Time.deltaTime;
-                else 
-                    times = 0;
+                speed = run;
+            }
+            else
+            {
+                speed = memor_speed;
+            }
+
+            RandL = true;
+            g_Animator.SetBool("RandL", RandL);
+
+            horizontal -= Time.deltaTime + times;
+        }
+        else if (horizontal < 0)
+        {
+            if (times > 0)
+                times -= Time.deltaTime;
+            else
+                times = 0;
 
             if (isRun)
-                {
-                    speed = run;
-                }
-                else
-                {
-                    speed = memor_speed;
-                }
-               
-                RandL = false;
-                g_Animator.SetBool("RandL", RandL);
-         
+            {
+                speed = run;
+            }
+            else
+            {
+                speed = memor_speed;
+            }
+
+            RandL = false;
+            g_Animator.SetBool("RandL", RandL);
+
             horizontal += Time.deltaTime + times;
-            }          
-          
-            Corect_flipX(horizontal);
-            Corect_flipX_sprite_weapons(horizontal);
+        }
+
+        Corect_flipX(horizontal);
+        Corect_flipX_sprite_weapons(horizontal);
 
         if (isGrounded && isJumping)
-        {           
+        {
             isJumping = false;
-            g_Animator.SetBool("Ground", false);           
+            g_Animator.SetBool("Ground", false);
             g_Rigidbody2D.AddForce(new Vector2(0f, jump), ForceMode2D.Impulse);
         }
         if (isGrounded && isAttact && g_Animator.GetBool("Ground"))
@@ -213,9 +264,29 @@ public class MoweRaven : Unit {
         }
     }
     ////////////////////////////////////////////////////////////
+    void CheckPleyar()
+    {
+        if (g_Object.Length != 0)
+        {
+            Transform player = g_Object[0].transform;
+            if (player.position.x < transform.position.x)
+            {
+                direction.x = -1f;
+                RandL = false;
+               
+            }
+            else if (player.position.x > transform.position.x)
+            {
+                direction.x = 1f;
+                RandL = true;
+               
+            }
+        }
+    }
+    ////////////////////////////////////////////////////////////
     void Attack()
-    {      
-            gameObject.GetComponent<Animator>().SetTrigger("attack");       
+    {
+        gameObject.GetComponent<Animator>().SetTrigger("attack");
     }
     public override void ReciveDamage(float damag)
     {
@@ -243,7 +314,7 @@ public class MoweRaven : Unit {
             sprite.flipX = position.x < 0;
     }
     ////////////////////////////////////////////////////////////
-    private bool time=false;
+    private bool time = false;
     public float timer = 2f;
     public float stay_timer = 2f;
     bool Times()
