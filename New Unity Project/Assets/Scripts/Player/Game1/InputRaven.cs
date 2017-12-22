@@ -13,7 +13,7 @@ public class InputRaven : Unit {
     private MoweRaven c_movement =null;
     private bool isJumping=false;
     private bool isRun = false;
-    private bool isAttact = false;
+    private bool isUsed = false;
 
     private bool isActive = false;
 
@@ -24,7 +24,7 @@ public class InputRaven : Unit {
 
     private bool isDoubleCR = false;
     private bool isDoubleCL = false;
-
+    public bool stop = true;
     public bool Activ = true;
     float currentTime = 0;  
    float lastClickTime = 0;
@@ -36,11 +36,15 @@ public class InputRaven : Unit {
         c_movement = GetComponent<MoweRaven>();
     }
 
-   
+   public void IsStop()
+    {
+        stop = !stop;
+    }
 
     void Update()
     {
-        if (Activ)
+        if (stop)
+            if (Activ)
         {
             //If he is not jumping...
             if (!isJumping)
@@ -53,20 +57,20 @@ public class InputRaven : Unit {
                 //See if button is pressed...
                 isRun = CnInputManager.GetButton("Run");
             }
-            if (!isAttact)
+            if (!isUsed)
             {
-                //See if button is pressed...
-                isAttact = CnInputManager.GetButton("Attack");
+                    //See if button is pressed...
+                    isUsed = CnInputManager.GetButton("Used");
             }
 
             if(!isUp)
             {
-               
+                    isUp = CnInputManager.GetButton("UpButton");
             }
             if (!isDown)
             {
-
-            }
+                    isDown = CnInputManager.GetButton("DownButton");
+                }
 
             if (!isLeft && !isRight)
             {
@@ -122,17 +126,18 @@ public class InputRaven : Unit {
 
     private void FixedUpdate()
     {
-        if (Activ)
+      
+            if (Activ)
         {
             //Get horizontal axis
             //float horizontal=0;// = CnInputManager.GetAxis("Horizontal");         
 
             //Call movement function in PlayerMovement
-            c_movement.Move(isLeft,isRight,isDoubleCR,isDoubleCL, isJumping, isRun, isAttact);
+            c_movement.Move(isUp, isDown, isLeft,isRight,isDoubleCR,isDoubleCL, isJumping, isRun, isUsed);
             //Reset
             isJumping = false;
             isRun = false;
-            isAttact = false;
+            isUsed = false;
 
             isUp = false;
             isDown = false;

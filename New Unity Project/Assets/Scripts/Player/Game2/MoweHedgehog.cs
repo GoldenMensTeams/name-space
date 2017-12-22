@@ -101,7 +101,7 @@ public class MoweHedgehog : Unit
     }
 
     ////////////////////////////////////////////////////////////
-    public void Move(bool isLeft, bool isRight, bool isDoubleR, bool isDoubleL, bool isJumping, bool isRun, bool isAttact)
+    public void Move(bool isLeft, bool isRight, bool isDoubleR, bool isDoubleL, bool isJumping, bool isRun, bool isUsed)
     {      
         if (isDoubleR || isDoubleL)
             isRun = true;
@@ -174,11 +174,12 @@ public class MoweHedgehog : Unit
             g_Animator.SetBool("Ground", false);
             g_Rigidbody2D.AddForce(new Vector2(0f, jump), ForceMode2D.Impulse);
         }
-        if (isGrounded && isAttact && g_Animator.GetBool("Ground"))
+        if (isGrounded && isUsed && g_Animator.GetBool("Ground"))
         {
-            
-            isAttact = false;
-            Attack();
+
+            isUsed = false;
+           // Attack();
+           // Used();
         }
     }
     public void Follow()

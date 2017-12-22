@@ -6,7 +6,9 @@ using UnityEngine;
 public class BackGround1 : MonoBehaviour
 {
 
-    public GameObject pl;
+    public InputRaven pl1;
+    public InputHedgehog pl2;
+    private GameObject obj;
 
     private List<float> x_list_stay;
   
@@ -35,7 +37,10 @@ public class BackGround1 : MonoBehaviour
         y = gameObject.transform.position.y;
 
         x_list_stay = new  List<float>();
-       
+        if (pl1.Activ)
+            obj = pl1.gameObject;
+        else
+            obj = pl2.gameObject;
 
         List_Back_Ground_Saved = new List<Vector2>();
         for (int i = 0; i < count_save; i++)
@@ -57,7 +62,7 @@ public class BackGround1 : MonoBehaviour
     void MovePoz()
     {
         for (int i = 0; i < List_Back_Ground.Count; i++)
-            List_Back_Ground[i].transform.position = new Vector3(pl.transform.position.x - x + x_list_stay[i], y / ProzSize[i] + (y - pl.transform.position.y) * ProzY[i], List_Back_Ground[i].transform.position.z);
+            List_Back_Ground[i].transform.position = new Vector3(obj.transform.position.x - x + x_list_stay[i], y / ProzSize[i] + (y - obj.transform.position.y) * ProzY[i], List_Back_Ground[i].transform.position.z);
         //(pl.transform.position.y - y / 2) + (y - pl.transform.position.y) * ProzY + height_back_ground
     }
     void Move(MeshRenderer mesh, Vector2 savedOffset, float speed)
@@ -91,6 +96,11 @@ public class BackGround1 : MonoBehaviour
 
     void Update()
     {
+
+        if (pl1.Activ)
+            obj = pl1.gameObject;
+        else
+            obj = pl2.gameObject;
         for (int i = 0; i < List_Back_Ground.Count; i++)
             if (List_Back_Ground[i])
                 Move(List_Back_Ground[i], List_Back_Ground_Saved[i], List_Back_Ground_Speed[i]);

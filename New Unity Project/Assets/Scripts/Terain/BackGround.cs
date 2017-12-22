@@ -6,7 +6,9 @@ using UnityEngine;
 public class BackGround : MonoBehaviour
 {
 
-    public GameObject pl;
+    public InputRaven  pl1;
+    public InputHedgehog pl2;
+    private GameObject obj;
     private float x;
     private float y;
     public float ProzY;
@@ -22,6 +24,11 @@ public class BackGround : MonoBehaviour
 
     void Start()
     {
+        if (pl1.Activ)
+            obj = pl1.gameObject;
+        else
+            obj = pl2.gameObject;
+
         x = gameObject.transform.position.x;
         y = gameObject.transform.position.y;
         List_Back_Ground_Saved = new List<Vector2>();
@@ -44,15 +51,15 @@ public class BackGround : MonoBehaviour
         //pl.transform.position.x - x + x_list[i]
 
         for (int i = 0; i < List_Back_Ground.Count; i++)
-            List_Back_Ground[i].transform.position = new Vector3(pl.transform.position.x,
-               (pl.transform.position.y -y/2)+ (y - pl.transform.position.y)*ProzY + height_back_ground,
+            List_Back_Ground[i].transform.position = new Vector3(obj.transform.position.x,
+               (obj.transform.position.y -y/2)+ (y - obj.transform.position.y)*ProzY + height_back_ground,
                 List_Back_Ground[i].transform.position.z);
       //  y + (y - pl.transform.position.y) + height_back_ground,
     }
     void Move(MeshRenderer mesh, Vector2 savedOffset, float speed)
     {
         Vector2 offset = Vector2.zero;
-        float tmpX = Mathf.Repeat(-(x + (x - pl.transform.position.x) / ProzX * speed), 1);
+        float tmpX = Mathf.Repeat(-(x + (x - obj.transform.position.x) / ProzX * speed), 1);
 
         offset = new Vector2(tmpX, savedOffset.y);
         mesh.sharedMaterial.SetTextureOffset("_MainTex", offset);
@@ -77,10 +84,17 @@ public class BackGround : MonoBehaviour
 
     void Update()
     {
+        if (pl1.Activ)
+            obj = pl1.gameObject;
+        else
+            obj = pl2.gameObject;
+
+      
+
         for (int i = 0; i < List_Back_Ground.Count; i++)
             if (List_Back_Ground[i]) Move(List_Back_Ground[i], List_Back_Ground_Saved[i], List_Back_Ground_Speed[i]);
 
-
+      
     }
 
     void OnDisable()

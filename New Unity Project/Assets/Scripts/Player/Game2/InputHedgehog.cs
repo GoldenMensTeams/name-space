@@ -11,7 +11,7 @@ public class InputHedgehog : Unit {
     private MoweHedgehog c_movement =null;
     private bool isJumping=false;
     private bool isRun = false;
-    private bool isAttact = false;
+    private bool isUsed = false;
 
     private bool isUp = false;
     private bool isDown = false;
@@ -21,7 +21,7 @@ public class InputHedgehog : Unit {
     private bool isDoubleCR = false;
     private bool isDoubleCL = false;
 
-
+    public bool stop = true;
     public bool Activ = true;
     float currentTime = 0;  
    float lastClickTime = 0;
@@ -45,11 +45,15 @@ public class InputHedgehog : Unit {
         c_movement = GetComponent<MoweHedgehog>();
     }
 
-   
+    public void IsStop()
+    {
+        stop = !stop;
+    }
 
     void Update()
     {
-        if (Activ)
+        if (stop)
+            if (Activ)
         {
             //If he is not jumping...
             if (!isJumping)
@@ -62,10 +66,10 @@ public class InputHedgehog : Unit {
                 //See if button is pressed...
                 isRun = CnInputManager.GetButton("Run");
             }
-            if (!isAttact)
+            if (!isUsed)
             {
-                //See if button is pressed...
-                isAttact = CnInputManager.GetButton("Attack");
+                    //See if button is pressed...
+                    isUsed = CnInputManager.GetButton("Used");
             }
 
             if(!isUp)
@@ -130,17 +134,18 @@ public class InputHedgehog : Unit {
 
     private void FixedUpdate()
     {
+       
         if (Activ)
         {
             //Get horizontal axis
             //float horizontal=0;// = CnInputManager.GetAxis("Horizontal");         
 
             //Call movement function in PlayerMovement
-            c_movement.Move(isLeft,isRight,isDoubleCR,isDoubleCL, isJumping, isRun, isAttact);
+            c_movement.Move(isLeft,isRight,isDoubleCR,isDoubleCL, isJumping, isRun, isUsed);
             //Reset
             isJumping = false;
             isRun = false;
-            isAttact = false;
+            isUsed = false;
 
             isUp = false;
             isDown = false;
