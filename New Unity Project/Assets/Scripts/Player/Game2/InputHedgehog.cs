@@ -69,7 +69,7 @@ public class InputHedgehog : Unit {
             if (!isUsed)
             {
                     //See if button is pressed...
-                    isUsed = CnInputManager.GetButton("Used");
+                    isUsed = CnInputManager.GetButtonDown("Used");
             }
 
             if(!isUp)

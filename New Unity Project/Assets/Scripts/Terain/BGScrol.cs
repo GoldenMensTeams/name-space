@@ -7,8 +7,10 @@ public class BGScrol : MonoBehaviour
 {
     public float backgroungSize;
     public float paralacSpeed;
-    public GameObject pl;
-   
+    public InputRaven pl1;
+    public InputHedgehog pl2;
+    private GameObject obj;
+
     public bool paralax, scrolling;
 
     private Transform cameraTranform;
@@ -24,6 +26,11 @@ public class BGScrol : MonoBehaviour
 
     private void Start()
     {
+        if (pl1.Activ)
+            obj = pl1.gameObject;
+        else
+            obj = pl2.gameObject;
+
         x = transform.position.x;
         cameraTranform = Camera.main.transform;
         lastCameraX = cameraTranform.position.x;
@@ -37,7 +44,11 @@ public class BGScrol : MonoBehaviour
     }
     private void Update()
     {
-       
+        if (pl1.Activ)
+            obj = pl1.gameObject;
+        else
+            obj = pl2.gameObject;
+
         if (paralax)
         {
             //float deltax = cameraTranform.position.x - lastCameraX;
@@ -45,7 +56,7 @@ public class BGScrol : MonoBehaviour
 
 
           
-                transform.position = new Vector3(pl.transform.position.x + (x - pl.transform.position.x) / paralacSpeed,
+                transform.position = new Vector3(obj.transform.position.x + (x - obj.transform.position.x) / paralacSpeed,
                     transform.position.y,
                     transform.position.z);
         }

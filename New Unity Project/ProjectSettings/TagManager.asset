@@ -19,6 +19,7 @@ TagManager:
   - MouthButton
   - Gra
   - Player2
+  - hole
   layers:
   - Default
   - TransparentFX

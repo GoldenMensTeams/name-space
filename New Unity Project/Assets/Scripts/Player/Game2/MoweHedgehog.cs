@@ -179,7 +179,7 @@ public class MoweHedgehog : Unit
 
             isUsed = false;
            // Attack();
-           // Used();
+            Used();
         }
     }
     public void Follow()
@@ -304,13 +304,27 @@ public class MoweHedgehog : Unit
         }
 
     }
-    void Attack()
+    void Used()
     {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), 0.3f);
+     
+        foreach (Collider2D c in colliders)
+        {
+            if (c.tag == "hole")
+            {
 
-        gameObject.GetComponent<Animator>().SetTrigger("attack");
-
-
+                Teleport f = c.GetComponent<Teleport>();
+                f.GoTo(GetComponent<Collider2D>());
+            }
+        }
     }
+    //void Attack()
+    //{
+
+    //    gameObject.GetComponent<Animator>().SetTrigger("attack");
+
+
+    //}
     ////////////////////////////////////////////////////////////
     void Corect_flipX_sprite_weapons(float horizontal)
     {

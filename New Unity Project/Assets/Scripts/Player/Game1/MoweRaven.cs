@@ -17,7 +17,8 @@ public class MoweRaven : Unit
     private bool RandL = true;
     private bool isGrounded = false;
 
-  
+    public int countFlay;
+    public int maxCountFlay;
 
     private Animator g_Animator;
     private SpriteRenderer sprite;
@@ -86,6 +87,8 @@ public class MoweRaven : Unit
             {
                 isGrounded = true;
                 g_Animator.SetBool("Ground", true);
+
+                countFlay = 0;
 
                 return;
             }
@@ -238,17 +241,24 @@ public class MoweRaven : Unit
         Corect_flipX(horizontal);
         Corect_flipX_sprite_weapons(horizontal);
 
-        if ( isJumping)
+        if (isGrounded && isJumping)
         {
             isJumping = false;
             g_Animator.SetBool("Ground", false);
             g_Rigidbody2D.AddForce(new Vector2(0f, jump), ForceMode2D.Impulse);
         }
+        else if (isJumping && countFlay<maxCountFlay)
+        {
+            countFlay++;
+            isJumping = false;
+            g_Animator.SetBool("Ground", false);
+            g_Rigidbody2D.AddForce(new Vector2(0f, jump/2), ForceMode2D.Impulse);
+        }
         if (isGrounded && isUsed && g_Animator.GetBool("Ground"))
         {
             isUsed = false;
             //Attack();
-            //Used();
+            Used();
         }
     }
     void HPControl()
@@ -284,11 +294,15 @@ public class MoweRaven : Unit
             }
         }
     }
-    ////////////////////////////////////////////////////////////
-    void Attack()
+    void Used()
     {
-        gameObject.GetComponent<Animator>().SetTrigger("attack");
+
     }
+    ////////////////////////////////////////////////////////////
+    //void Attack()
+    //{
+    //    gameObject.GetComponent<Animator>().SetTrigger("attack");
+    //}
     public override void ReciveDamage(float damag)
     {
 
