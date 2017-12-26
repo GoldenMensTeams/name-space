@@ -13,6 +13,10 @@ public class LoadingLevel : MonoBehaviour {
     {
         Application.LoadLevel(Level);
     }
+    public static void LoadLevel(string load)
+    {
+        Application.LoadLevel(load);
+    }
 	// Update is called once per frame
 	void Update () {
         
