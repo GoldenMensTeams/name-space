@@ -5,8 +5,18 @@ using UnityEngine.UI;
 
 public class MoweHedgehog : Unit
 {
+   
+
+    public AudioClip[] FootSteps;
+    public AudioSource audioSource;
+    bool IsStep = false;
+    float StopStep;
+    public float StartStopStep;
+   
+
 
     public Image UIHP;
+   
 
     Vector3 position;
 
@@ -14,7 +24,7 @@ public class MoweHedgehog : Unit
     public float run;
     public float jump = 5f;
 
-  
+
 
     private float horizontal = 0;
     private bool RandL = true;
@@ -33,7 +43,7 @@ public class MoweHedgehog : Unit
     private void Awake()
     {
         Child = gameObject.transform.Find("Weapon_1").gameObject;
-
+        StopStep = StartStopStep;
 
         g_Rigidbody2D = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
@@ -47,7 +57,7 @@ public class MoweHedgehog : Unit
         memor_speed = speed;
         direction = transform.right;
 
-      
+
         g_Object = GameObject.FindGameObjectsWithTag("Player1");
 
         if (g_Object.Length != 0)
@@ -102,7 +112,7 @@ public class MoweHedgehog : Unit
 
     ////////////////////////////////////////////////////////////
     public void Move(bool isLeft, bool isRight, bool isDoubleR, bool isDoubleL, bool isJumping, bool isRun, bool isUsed)
-    {      
+    {
         if (isDoubleR || isDoubleL)
             isRun = true;
 
@@ -141,6 +151,8 @@ public class MoweHedgehog : Unit
             g_Animator.SetBool("RandL", RandL);
             ///////////////////--------------------------////////////////////////
             horizontal -= Time.deltaTime + times;
+            if (isGrounded)
+                MoweAudio();
         }
         else if (horizontal < 0)
         {
@@ -162,14 +174,20 @@ public class MoweHedgehog : Unit
             g_Animator.SetBool("RandL", RandL);
             ///////////////////--------------------------////////////////////////
             horizontal += Time.deltaTime + times;
+            if (isGrounded)
+                MoweAudio();
         }
-    
+        else if(!IsStep)
+        {
+            StopAudio();
+        }
+          
         Corect_flipX(horizontal);
         Corect_flipX_sprite_weapons(horizontal);
 
         if (isGrounded && isJumping)
         {
-      
+
             isJumping = false;
             g_Animator.SetBool("Ground", false);
             g_Rigidbody2D.AddForce(new Vector2(0f, jump), ForceMode2D.Impulse);
@@ -178,7 +196,7 @@ public class MoweHedgehog : Unit
         {
 
             isUsed = false;
-           // Attack();
+            // Attack();
             Used();
         }
     }
@@ -200,7 +218,7 @@ public class MoweHedgehog : Unit
                 else if (!RandL)
                     horizontal = -1f;
 
-               
+
                 g_Animator.SetBool("RandL", RandL);
 
 
@@ -227,13 +245,13 @@ public class MoweHedgehog : Unit
             //}
 
         }
-        
+
         if (isP)
         {
-            
-            
-          
-             if (Mathf.Abs(horizontal) <= 0.01)
+
+
+
+            if (Mathf.Abs(horizontal) <= 0.01)
             {
                 horizontal = 0;
                 times = 0.2f;
@@ -244,13 +262,13 @@ public class MoweHedgehog : Unit
             else
                 times = 0;
 
-            
-            g_Rigidbody2D.velocity = new Vector2(horizontal * speed, g_Rigidbody2D.velocity.y);
-            g_Animator.SetFloat("MoveX", horizontal * speed );
 
-            if(horizontal>0)
+            g_Rigidbody2D.velocity = new Vector2(horizontal * speed, g_Rigidbody2D.velocity.y);
+            g_Animator.SetFloat("MoveX", horizontal * speed);
+
+            if (horizontal > 0)
                 horizontal -= Time.deltaTime + times;
-            else if(horizontal < 0)
+            else if (horizontal < 0)
                 horizontal += Time.deltaTime + times;
         }
 
@@ -279,19 +297,19 @@ public class MoweHedgehog : Unit
         if (g_Object.Length != 0)
         {
             Transform player = g_Object[0].transform;
-            if (player.position.x<transform.position.x)
+            if (player.position.x < transform.position.x)
             {
                 direction.x = -1f;
                 RandL = false;
-               
+
             }
             else if (player.position.x > transform.position.x)
             {
                 direction.x = 1f;
                 RandL = true;
-              
+
             }
-         }
+        }
     }
     ////////////////////////////////////////////////////////////
     public override void ReciveDamage(float damag)
@@ -307,7 +325,7 @@ public class MoweHedgehog : Unit
     void Used()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), 0.3f);
-     
+
         foreach (Collider2D c in colliders)
         {
             if (c.tag == "hole")
@@ -358,5 +376,34 @@ public class MoweHedgehog : Unit
         }
         return false;
     }
+    void MoweAudio()
+    {
 
+                          
+        if(IsStep)
+        {
+          
+            audioSource.PlayOneShot(FootSteps[Random.Range(0, FootSteps.Length)]);
+           
+            IsStep = false;
+        }
+       
+
+        if (StopStep < 0)
+        {
+            StopStep = StartStopStep;
+            IsStep = true;
+        }
+         if (StopStep > 0)
+            StopStep -= Time.deltaTime;
+
+
+    }
+    void StopAudio()
+    {
+        audioSource.Stop();
+     
+        StopStep = StartStopStep;
+        IsStep = true;
+    }
 }

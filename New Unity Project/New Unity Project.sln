@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2017
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2008
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "New Unity Project", "New Unity Project.csproj", "{BFD958C4-5209-89E8-D1A0-F25854A4DC74}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "New Unity Project.Editor", "New Unity Project.Editor.csproj", "{5D0D6DBA-D4EA-5009-48A2-1663BA1D134D}"
@@ -22,5 +24,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {597E12A7-827F-458E-A5E4-1BFE54AB97E4}
 	EndGlobalSection
 EndGlobal

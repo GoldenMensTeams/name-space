@@ -5,6 +5,12 @@ using UnityEngine.UI;
 
 public class MoweRaven : Unit
 {
+    public AudioClip[] FootSteps;
+    public AudioSource audioSource;
+    bool IsStep = false;
+    float StopStep;
+    public float StartStopStep;
+
     public Image UIHP;
 
     Vector3 position;
@@ -215,6 +221,8 @@ public class MoweRaven : Unit
             g_Animator.SetBool("RandL", RandL);
 
             horizontal -= Time.deltaTime + times;
+            if (isGrounded)
+            MoweAudio();
         }
         else if (horizontal < 0)
         {
@@ -236,6 +244,12 @@ public class MoweRaven : Unit
             g_Animator.SetBool("RandL", RandL);
 
             horizontal += Time.deltaTime + times;
+            if (isGrounded)
+                MoweAudio();
+        }
+        else if (!IsStep)
+        {
+            StopAudio();
         }
 
         Corect_flipX(horizontal);
@@ -347,4 +361,34 @@ public class MoweRaven : Unit
         return false;
     }
     ////////////////////////////////////////////////////////////
+    void MoweAudio()
+    {
+
+
+        if (IsStep)
+        {
+
+            audioSource.PlayOneShot(FootSteps[Random.Range(0, FootSteps.Length)]);
+
+            IsStep = false;
+        }
+
+
+        if (StopStep < 0)
+        {
+            StopStep = StartStopStep;
+            IsStep = true;
+        }
+        if (StopStep > 0)
+            StopStep -= Time.deltaTime;
+
+
+    }
+    void StopAudio()
+    {
+        audioSource.Stop();
+
+        StopStep = StartStopStep;
+        IsStep = true;
+    }
 }
