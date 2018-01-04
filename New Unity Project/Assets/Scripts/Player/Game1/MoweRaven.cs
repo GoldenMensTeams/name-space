@@ -167,9 +167,24 @@ public class MoweRaven : Unit
             g_Animator.SetFloat("MoveX", horizontal * speed);
 
             if (horizontal > 0)
+            {
                 horizontal -= Time.deltaTime + times;
+                if (isGrounded)
+                    MoweAudio();
+            }
+               
             else if (horizontal < 0)
+            {
                 horizontal += Time.deltaTime + times;
+
+                if (isGrounded)
+                    MoweAudio();
+            }
+          
+        }
+        else if (!IsStep)
+        {
+            StopAudio();
         }
 
         Corect_flipX(horizontal);
