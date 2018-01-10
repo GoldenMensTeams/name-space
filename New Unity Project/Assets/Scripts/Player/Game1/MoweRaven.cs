@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class MoweRaven : Unit
 {
     public AudioClip[] FootSteps;
+    public AudioClip fallClip;
     public AudioSource audioSource;
+    public AudioSource fallAudio;
     bool IsStep = false;
     float StopStep;
     public float StartStopStep;
@@ -22,6 +24,7 @@ public class MoweRaven : Unit
     private float horizontal = 0;
     private bool RandL = true;
     private bool isGrounded = false;
+    private bool isGroundedStart = false;
 
     public int countFlay;
     public int maxCountFlay;
@@ -66,15 +69,30 @@ public class MoweRaven : Unit
         {
             isGrounded = false;
 
-            // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-            // This can be done using layers instead but Sample Assets will not overwrite your project settings.
+         
             CheckGrounded();
             HPControl();
 
-            g_Animator.SetBool("Ground", isGrounded);
-
-            //Set the vertical animation
+            g_Animator.SetBool("Ground", isGrounded);        
+          
             g_Animator.SetFloat("vSpeed", g_Rigidbody2D.velocity.y);
+
+
+            if (horizontal > 0 || horizontal < 0)
+            {
+                if (isGrounded)
+                    MoweAudio();
+            }
+            else if (!IsStep)
+            {
+                StopAudio();
+            }
+
+            if (isGrounded && !isGroundedStart)
+            {
+                DownAudio();
+            }
+            isGroundedStart = isGrounded;
         }
     }
     private void Update()
@@ -90,7 +108,8 @@ public class MoweRaven : Unit
         foreach (Collider2D c in colliders)
         {
             if (c.tag == "Ground")
-            {
+            {                                         
+               
                 isGrounded = true;
                 g_Animator.SetBool("Ground", true);
 
@@ -162,31 +181,22 @@ public class MoweRaven : Unit
             else
                 times = 0;
 
-           
+         
             g_Rigidbody2D.velocity = new Vector2(horizontal * speed, g_Rigidbody2D.velocity.y);
             g_Animator.SetFloat("MoveX", horizontal * speed);
 
             if (horizontal > 0)
             {
-                horizontal -= Time.deltaTime + times;
-                if (isGrounded)
-                    MoweAudio();
+                horizontal -= Time.deltaTime + times;            
             }
                
             else if (horizontal < 0)
             {
-                horizontal += Time.deltaTime + times;
-
-                if (isGrounded)
-                    MoweAudio();
+                horizontal += Time.deltaTime + times;             
             }
           
         }
-        else if (!IsStep)
-        {
-            StopAudio();
-        }
-
+      
         Corect_flipX(horizontal);
         Corect_flipX_sprite_weapons(horizontal);
         CheckPleyar();
@@ -236,8 +246,7 @@ public class MoweRaven : Unit
             g_Animator.SetBool("RandL", RandL);
 
             horizontal -= Time.deltaTime + times;
-            if (isGrounded)
-            MoweAudio();
+          
         }
         else if (horizontal < 0)
         {
@@ -259,13 +268,9 @@ public class MoweRaven : Unit
             g_Animator.SetBool("RandL", RandL);
 
             horizontal += Time.deltaTime + times;
-            if (isGrounded)
-                MoweAudio();
+           
         }
-        else if (!IsStep)
-        {
-            StopAudio();
-        }
+      
 
         Corect_flipX(horizontal);
         Corect_flipX_sprite_weapons(horizontal);
@@ -283,6 +288,10 @@ public class MoweRaven : Unit
             g_Animator.SetBool("Ground", false);
             g_Rigidbody2D.AddForce(new Vector2(0f, jump/2), ForceMode2D.Impulse);
         }
+
+        
+       
+
         if (isGrounded && isUsed && g_Animator.GetBool("Ground"))
         {
             isUsed = false;
@@ -399,6 +408,10 @@ public class MoweRaven : Unit
 
 
     }
+    void DownAudio()
+    {        
+            fallAudio.PlayOneShot(fallClip); 
+    }
     void StopAudio()
     {
         audioSource.Stop();
@@ -406,4 +419,5 @@ public class MoweRaven : Unit
         StopStep = StartStopStep;
         IsStep = true;
     }
+   
 }

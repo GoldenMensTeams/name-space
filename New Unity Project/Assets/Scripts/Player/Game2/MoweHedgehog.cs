@@ -8,7 +8,9 @@ public class MoweHedgehog : Unit
    
 
     public AudioClip[] FootSteps;
+    public AudioClip fallClip;
     public AudioSource audioSource;
+    public AudioSource fallAudio;
     bool IsStep = false;
     float StopStep;
     public float StartStopStep;
@@ -29,6 +31,7 @@ public class MoweHedgehog : Unit
     private float horizontal = 0;
     private bool RandL = true;
     private bool isGrounded = false;
+    private bool isGroundedStart = false;
 
     private Animator g_Animator;
     private SpriteRenderer sprite;
@@ -85,6 +88,23 @@ public class MoweHedgehog : Unit
 
         //Set the vertical animation
         g_Animator.SetFloat("vSpeed", g_Rigidbody2D.velocity.y);
+
+
+        if (horizontal > 0|| horizontal < 0)
+        {
+            if (isGrounded)
+                MoweAudio();
+        }
+        else if (!IsStep)
+        {
+            StopAudio();
+        }
+
+        if (isGrounded && !isGroundedStart)
+        {
+            DownAudio();
+        }
+        isGroundedStart = isGrounded;
     }
     ////////////////////////////////////////////////////////////
     void CheckGrounded()
@@ -151,8 +171,7 @@ public class MoweHedgehog : Unit
             g_Animator.SetBool("RandL", RandL);
             ///////////////////--------------------------////////////////////////
             horizontal -= Time.deltaTime + times;
-            if (isGrounded)
-                MoweAudio();
+           
         }
         else if (horizontal < 0)
         {
@@ -174,13 +193,9 @@ public class MoweHedgehog : Unit
             g_Animator.SetBool("RandL", RandL);
             ///////////////////--------------------------////////////////////////
             horizontal += Time.deltaTime + times;
-            if (isGrounded)
-                MoweAudio();
+           
         }
-        else if(!IsStep)
-        {
-            StopAudio();
-        }
+      
           
         Corect_flipX(horizontal);
         Corect_flipX_sprite_weapons(horizontal);
@@ -269,22 +284,17 @@ public class MoweHedgehog : Unit
             if (horizontal > 0)
             {
                 horizontal -= Time.deltaTime + times;
-                if (isGrounded)
-                    MoweAudio();
+               
             }
             else if (horizontal < 0)
             {
                 horizontal += Time.deltaTime + times;
-                if (isGrounded)
-                    MoweAudio();
+              
             }
               
            
         }
-        else if (!IsStep)
-        {
-            StopAudio();
-        }
+     
 
 
         Corect_flipX(horizontal);
@@ -412,6 +422,10 @@ public class MoweHedgehog : Unit
             StopStep -= Time.deltaTime;
 
 
+    }
+    void DownAudio()
+    {
+        fallAudio.PlayOneShot(fallClip);
     }
     void StopAudio()
     {
