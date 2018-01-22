@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <RootNamespace></RootNamespace>
+    <ProjectGuid>{B2B58FB2-4462-6B0C-A872-40DD957E5FE0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <BaseDirectory>Assets</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_5_6_4;UNITY_5_6;UNITY_5;UNITY_ANALYTICS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_RUNTIME_NAVMESH_BUILDING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;INCLUDE_DYNAMIC_GI;INCLUDE_GI;PLATFORM_SUPPORTS_MONO;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_SCRIPTING_NEW_CSHARP_COMPILER;ENABLE_VIDEO;UNITY_ANDROID;ENABLE_SUBSTANCE;UNITY_ANDROID_API;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;PLATFORM_SUPPORTS_ADS_ID;UNITY_CAN_SHOW_SPLASH_SCREEN;ENABLE_VR;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;NET_2_0;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE;UNITY_HAS_GOOGLEVR</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Temp\bin\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine">
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Model\Anima2D\Examples\Scripts\CharacterMotion.cs" />
+     <Compile Include="Assets\Model\Anima2D\Examples\Scripts\Follow.cs" />
+     <Compile Include="Assets\Model\Anima2D\Examples\Scripts\SkinnedMeshCombiner.cs" />
+     <Compile Include="Assets\Model\Anima2D\Examples\Scripts\SpringBone.cs" />
+     <Compile Include="Assets\Model\Anima2D\Examples\Scripts\SpringCollider.cs" />
+     <Compile Include="Assets\Model\Anima2D\Examples\Scripts\SpringManager.cs" />
+     <Compile Include="Assets\Model\Anima2D\Examples\Scripts\SpriteCycle.cs" />
+     <Compile Include="Assets\Model\Anima2D\Examples\Scripts\SpriteCycleParallax.cs" />
+     <Compile Include="Assets\Model\Anima2D\Scripts\Bone2D.cs" />
+     <Compile Include="Assets\Model\Anima2D\Scripts\Control.cs" />
+     <Compile Include="Assets\Model\Anima2D\Scripts\EditorUpdaterProxy.cs" />
+     <Compile Include="Assets\Model\Anima2D\Scripts\Ik2D.cs" />
+     <Compile Include="Assets\Model\Anima2D\Scripts\IkCCD2D.cs" />
+     <Compile Include="Assets\Model\Anima2D\Scripts\IkGroup.cs" />
+     <Compile Include="Assets\Model\Anima2D\Scripts\IkLimb2D.cs" />
+     <Compile Include="Assets\Model\Anima2D\Scripts\IkSolver2D.cs" />
+     <Compile Include="Assets\Model\Anima2D\Scripts\IkSolver2DCCD.cs" />
+     <Compile Include="Assets\Model\Anima2D\Scripts\IkSolver2DLimb.cs" />
+     <Compile Include="Assets\Model\Anima2D\Scripts\MathUtils.cs" />
+     <Compile Include="Assets\Model\Anima2D\Scripts\Pose.cs" />
+     <Compile Include="Assets\Model\Anima2D\Scripts\PoseManager.cs" />
+     <Compile Include="Assets\Model\Anima2D\Scripts\SpriteMesh.cs" />
+     <Compile Include="Assets\Model\Anima2D\Scripts\SpriteMeshAnimation.cs" />
+     <Compile Include="Assets\Model\Anima2D\Scripts\SpriteMeshInstance.cs" />
+     <Compile Include="Assets\Model\Standard Assets\2D\Scripts\Camera2DFollow.cs" />
+     <Compile Include="Assets\Model\Standard Assets\2D\Scripts\CameraFollow.cs" />
+     <Compile Include="Assets\Model\Standard Assets\2D\Scripts\Platformer2DUserControl.cs" />
+     <Compile Include="Assets\Model\Standard Assets\2D\Scripts\PlatformerCharacter2D.cs" />
+     <Compile Include="Assets\Model\Standard Assets\2D\Scripts\Restarter.cs" />
+     <Compile Include="Assets\Model\Standard Assets\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
+     <Compile Include="Assets\Model\Standard Assets\CrossPlatformInput\Scripts\ButtonHandler.cs" />
+     <Compile Include="Assets\Model\Standard Assets\CrossPlatformInput\Scripts\CrossPlatformInputManager.cs" />
+     <Compile Include="Assets\Model\Standard Assets\CrossPlatformInput\Scripts\InputAxisScrollbar.cs" />
+     <Compile Include="Assets\Model\Standard Assets\CrossPlatformInput\Scripts\Joystick.cs" />
+     <Compile Include="Assets\Model\Standard Assets\CrossPlatformInput\Scripts\MobileControlRig.cs" />
+     <Compile Include="Assets\Model\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\MobileInput.cs" />
+     <Compile Include="Assets\Model\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
+     <Compile Include="Assets\Model\Standard Assets\CrossPlatformInput\Scripts\TiltInput.cs" />
+     <Compile Include="Assets\Model\Standard Assets\CrossPlatformInput\Scripts\TouchPad.cs" />
+     <Compile Include="Assets\Model\Standard Assets\CrossPlatformInput\Scripts\VirtualInput.cs" />
+     <Compile Include="Assets\Model\Standard Assets\Utility\ActivateTrigger.cs" />
+     <Compile Include="Assets\Model\Standard Assets\Utility\AlphaButtonClickMask.cs" />
+     <Compile Include="Assets\Model\Standard Assets\Utility\AutoMobileShaderSwitch.cs" />
+     <Compile Include="Assets\Model\Standard Assets\Utility\AutoMoveAndRotate.cs" />
+     <Compile Include="Assets\Model\Standard Assets\Utility\CameraRefocus.cs" />
+     <Compile Include="Assets\Model\Standard Assets\Utility\CurveControlledBob.cs" />
+     <Compile Include="Assets\Model\Standard Assets\Utility\DragRigidbody.cs" />
+     <Compile Include="Assets\Model\Standard Assets\Utility\DynamicShadowSettings.cs" />
+     <Compile Include="Assets\Model\Standard Assets\Utility\EventSystemChecker.cs" />
+     <Compile Include="Assets\Model\Standard Assets\Utility\FOVKick.cs" />
+     <Compile Include="Assets\Model\Standard Assets\Utility\FPSCounter.cs" />
+     <Compile Include="Assets\Model\Standard Assets\Utility\FollowTarget.cs" />
+     <Compile Include="Assets\Model\Standard Assets\Utility\ForcedReset.cs" />
+     <Compile Include="Assets\Model\Standard Assets\Utility\LerpControlledBob.cs" />
+     <Compile Include="Assets\Model\Standard Assets\Utility\ObjectResetter.cs" />
+     <Compile Include="Assets\Model\Standard Assets\Utility\ParticleSystemDestroyer.cs" />
+     <Compile Include="Assets\Model\Standard Assets\Utility\PlatformSpecificContent.cs" />
+     <Compile Include="Assets\Model\Standard Assets\Utility\SimpleActivatorMenu.cs" />
+     <Compile Include="Assets\Model\Standard Assets\Utility\SimpleMouseRotator.cs" />
+     <Compile Include="Assets\Model\Standard Assets\Utility\SmoothFollow.cs" />
+     <Compile Include="Assets\Model\Standard Assets\Utility\TimedObjectActivator.cs" />
+     <Compile Include="Assets\Model\Standard Assets\Utility\TimedObjectDestructor.cs" />
+     <Compile Include="Assets\Model\Standard Assets\Utility\WaypointCircuit.cs" />
+     <Compile Include="Assets\Model\Standard Assets\Utility\WaypointProgressTracker.cs" />
+     <Compile Include="Assets\Scripts\Audio\Map1.cs" />
+     <Compile Include="Assets\Scripts\CNControls\Examples\Scenes\2D\Scripts\Platformer2DUserControl.cs" />
+     <Compile Include="Assets\Scripts\CNControls\Examples\Scenes\Custom Joystick\FourWayController.cs" />
+     <Compile Include="Assets\Scripts\CNControls\Examples\Scenes\Third Person\AbstractTargetFollower.cs" />
+     <Compile Include="Assets\Scripts\CNControls\Examples\Scenes\Third Person\AutoCam.cs" />
+     <Compile Include="Assets\Scripts\CNControls\Examples\Scenes\Third Person\PivotBasedCameraRig.cs" />
+     <Compile Include="Assets\Scripts\CNControls\Examples\Scenes\Third Person\ThidPersonExampleController.cs" />
+     <Compile Include="Assets\Scripts\CNControls\Examples\Scenes\Touchpad Camera\RotateCamera.cs" />
+     <Compile Include="Assets\Scripts\CNControls\Examples\Scenes\Touchpad Camera\RotationConstraint.cs" />
+     <Compile Include="Assets\Scripts\CNControls\Scripts\CnInputSystem\CnInputManager.cs" />
+     <Compile Include="Assets\Scripts\CNControls\Scripts\CnInputSystem\VirtualAxis.cs" />
+     <Compile Include="Assets\Scripts\CNControls\Scripts\CnInputSystem\VirtualButton.cs" />
+     <Compile Include="Assets\Scripts\CNControls\Scripts\Controllers\CommonOnScreenControl.cs" />
+     <Compile Include="Assets\Scripts\CNControls\Scripts\Controllers\Dpad.cs" />
+     <Compile Include="Assets\Scripts\CNControls\Scripts\Controllers\DpadAxis.cs" />
+     <Compile Include="Assets\Scripts\CNControls\Scripts\Controllers\SensitiveJoystick.cs" />
+     <Compile Include="Assets\Scripts\CNControls\Scripts\Controllers\SimpleButton.cs" />
+     <Compile Include="Assets\Scripts\CNControls\Scripts\Controllers\SimpleJoystick.cs" />
+     <Compile Include="Assets\Scripts\CNControls\Scripts\Controllers\Touchpad.cs" />
+     <Compile Include="Assets\Scripts\CNControls\Scripts\EmptyGraphic.cs" />
+     <Compile Include="Assets\Scripts\CameraScrin.cs" />
+     <Compile Include="Assets\Scripts\ListBaseEnemy.cs" />
+     <Compile Include="Assets\Scripts\Menu\CloseMenu.cs" />
+     <Compile Include="Assets\Scripts\Menu\GameExit.cs" />
+     <Compile Include="Assets\Scripts\Menu\GeneralMenuScript.cs" />
+     <Compile Include="Assets\Scripts\Menu\LoadingLevel.cs" />
+     <Compile Include="Assets\Scripts\Menu\MainScen\MainScreen.cs" />
+     <Compile Include="Assets\Scripts\Menu\OpenMenu.cs" />
+     <Compile Include="Assets\Scripts\Player\ControlPle.cs" />
+     <Compile Include="Assets\Scripts\Player\Game1\InputRaven.cs" />
+     <Compile Include="Assets\Scripts\Player\Game1\MoweRaven.cs" />
+     <Compile Include="Assets\Scripts\Player\Game2\InputHedgehog.cs" />
+     <Compile Include="Assets\Scripts\Player\Game2\MoweHedgehog.cs" />
+     <Compile Include="Assets\Scripts\Player\InputPlayer.cs" />
+     <Compile Include="Assets\Scripts\Player\ListWeapon.cs" />
+     <Compile Include="Assets\Scripts\Player\MowePlayer.cs" />
+     <Compile Include="Assets\Scripts\Player\StatusBar.cs" />
+     <Compile Include="Assets\Scripts\Player\map.cs" />
+     <Compile Include="Assets\Scripts\PlayerGui\ClicButton.cs" />
+     <Compile Include="Assets\Scripts\Reset.cs" />
+     <Compile Include="Assets\Scripts\Spavn\Spavn_1.cs" />
+     <Compile Include="Assets\Scripts\Spavn\Teleport.cs" />
+     <Compile Include="Assets\Scripts\Stop.cs" />
+     <Compile Include="Assets\Scripts\Terain\BGScrol.cs" />
+     <Compile Include="Assets\Scripts\Terain\BackGround.cs" />
+     <Compile Include="Assets\Scripts\Terain\BackGround1.cs" />
+     <Compile Include="Assets\Scripts\Terain\BackGround_element.cs" />
+     <Compile Include="Assets\Scripts\Terain\BackGround_element_paralax_3.cs" />
+     <Compile Include="Assets\Scripts\Terain\Ground.cs" />
+     <Compile Include="Assets\Scripts\Terain\Resp.cs" />
+     <Compile Include="Assets\Scripts\Terain\Water.cs" />
+     <Compile Include="Assets\Scripts\Traps\BaseTrap.cs" />
+     <Compile Include="Assets\Scripts\Traps\LiveTrap.cs" />
+     <Compile Include="Assets\Scripts\Traps\PoisonousTrap.cs" />
+     <Compile Include="Assets\Scripts\Traps\StikchingTrap.cs" />
+     <Compile Include="Assets\Scripts\Tutorial\Scripts\PlayerInput.cs" />
+     <Compile Include="Assets\Scripts\Tutorial\Scripts\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\Unit.cs" />
+     <Compile Include="Assets\Scripts\enemy\BasseEnemy.cs" />
+     <Compile Include="Assets\Scripts\enemy\Enemy_1.cs" />
+     <Compile Include="Assets\Scripts\weapons\Head.cs" />
+     <Compile Include="Assets\Scripts\weapons\IParams.cs" />
+     <Compile Include="Assets\Scripts\weapons\IWeapon.cs" />
+     <Compile Include="Assets\Scripts\weapons\Param_damag.cs" />
+     <Compile Include="Assets\Scripts\weapons\Sword.cs" />
+     <None Include="Assets\Model\Task1\DrawIO.xml" />
+     <None Include="Assets\Model\Anima2D\Examples\Shaders\VisibleInsideMask.shader" />
+     <None Include="Assets\Model\Anima2D\Examples\Shaders\VisibleOutsideMask.shader" />
+     <None Include="Assets\Model\Anima2D\Version.txt" />
+     <None Include="Assets\Model\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
+     <None Include="Assets\Texture\Shaders\BLUR.shader" />
+     <None Include="Assets\Model\Anima2D\Examples\Shaders\Unlit-Alpha-Cull-off.shader" />
+     <None Include="Assets\Model\Anima2D\Licenses.txt" />
+     <None Include="Assets\Model\Anima2D\Examples\Shaders\VertexLitOneDirectional.shader" />
+     <None Include="Assets\Model\Anima2D\Readme.txt" />
+ <Reference Include="UnityEngine.UI">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.TestRunner">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+ </Reference>
+ <Reference Include="nunit.framework">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.HoloLens">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.VR">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>
