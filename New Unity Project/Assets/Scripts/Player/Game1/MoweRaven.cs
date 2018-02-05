@@ -201,11 +201,13 @@ public class MoweRaven : Unit
         Corect_flipX_sprite_weapons(horizontal);
         CheckPleyar();
     }
-    public void Move(bool isUp, bool isDown, bool isLeft, bool isRight, bool isDoubleR, bool isDoubleL, bool isJumping, bool isRun, bool isUsed)
+    public void Move(bool isUp, bool isDown, bool isLeft, bool isRight, bool isDoubleR, bool isDoubleL, bool isJumping, bool isRun, bool isUsed, Touch [] t)
     {
         //if (isGrounded)
         //{
         // The Speed animator parameter is set to the absolute value of the horizontal input.
+
+        t[0].position.x;
 
 
         if (isDoubleR || isDoubleL)

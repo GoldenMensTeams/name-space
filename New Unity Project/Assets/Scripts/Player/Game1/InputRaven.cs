@@ -29,7 +29,7 @@ public class InputRaven : Unit {
     float currentTime = 0;  
    float lastClickTime = 0;
    float clickTime = 0.2F;
-  
+    Touch [] touch;
     void Awake()
     {
         //References
@@ -45,9 +45,21 @@ public class InputRaven : Unit {
     {
         if (stop)
             if (Activ)
-        {
-            //If he is not jumping...
-            if (!isJumping)
+            {
+
+
+                if (Input.touchCount > 0)
+                {
+                    touch = Input.touches;
+                }
+                   
+
+            
+
+
+
+        //If he is not jumping...
+        if (!isJumping)
             {
                 //See if button is pressed...
                 isJumping = CnInputManager.GetButtonUp("Jump");
@@ -133,7 +145,7 @@ public class InputRaven : Unit {
             //float horizontal=0;// = CnInputManager.GetAxis("Horizontal");         
 
             //Call movement function in PlayerMovement
-            c_movement.Move(isUp, isDown, isLeft,isRight,isDoubleCR,isDoubleCL, isJumping, isRun, isUsed);
+            c_movement.Move(isUp, isDown, isLeft,isRight,isDoubleCR,isDoubleCL, isJumping, isRun, isUsed, touch);
             //Reset
             isJumping = false;
             isRun = false;
